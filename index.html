@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Niño 2026–2027 · Sudeste e Rio de Janeiro — Relatório Analítico</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --imperial:#0a2540;        /* azul imperial RJ */
+  --imperial-2:#123a63;
+  --ceu:#1b6ec2;             /* azul céu institucional */
+  --ouro:#c9a227;            /* ouro/dourado do brasão */
+  --ouro-claro:#e6c65c;
+  --areia:#f5f2ea;
+  --papel:#fbfaf6;
+  --carvao:#1a1d21;
+  --cinza:#5b6570;
+  --linha:#e2ddd0;
+  --alerta:#b23a2e;          /* vermelho terracota (seca/fogo) */
+  --alerta-2:#e07a4f;
+  --agua:#2a7d8c;            /* verde-água hídrico */
+  --verde:#3f7d4e;
+  --branco:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Georgia","Times New Roman",serif;
+  color:var(--carvao);background:var(--papel);
+  line-height:1.65;font-size:16.5px;
+}
+.sans{font-family:"Helvetica Neue",Arial,sans-serif}
+h1,h2,h3,.eyebrow,.metric-num,.chip,nav,.tag,table,.leaflet-container,.legend,.foot{font-family:"Helvetica Neue",Arial,sans-serif}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:900;background:rgba(10,37,64,.97);backdrop-filter:blur(6px);
+  border-bottom:2px solid var(--ouro);display:flex;align-items:center;gap:0;padding:0 20px;overflow-x:auto}
+nav .brand{color:var(--branco);font-weight:800;font-size:13px;letter-spacing:.5px;padding:14px 18px 14px 0;white-space:nowrap;border-right:1px solid rgba(255,255,255,.15);margin-right:6px}
+nav .brand b{color:var(--ouro-claro)}
+nav a{color:#cdd8e6;text-decoration:none;font-size:12.5px;font-weight:600;padding:15px 13px;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s}
+nav a:hover{color:#fff}
+nav a.active{color:#fff;border-bottom-color:var(--ouro)}
+
+/* ---------- HERO ---------- */
+header.hero{
+  background:
+    radial-gradient(circle at 82% 18%, rgba(201,162,39,.16), transparent 42%),
+    linear-gradient(135deg,var(--imperial) 0%,var(--imperial-2) 58%,#0d2e50 100%);
+  color:var(--branco);padding:64px 28px 54px;position:relative;overflow:hidden;
+  border-bottom:4px solid var(--ouro)
+}
+header.hero .wrap{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+.hero .eyebrow{color:var(--ouro-claro);font-size:12.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(30px,5.2vw,58px);line-height:1.04;font-weight:800;letter-spacing:-1px;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--ouro-claro)}
+.hero .sub{font-size:clamp(16px,2vw,20px);color:#c6d2e2;margin-top:20px;max-width:60ch;line-height:1.55}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.hero .chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);color:#e8eef6;
+  font-size:12px;font-weight:600;padding:7px 13px;border-radius:2px;letter-spacing:.3px}
+.hero .chip b{color:var(--ouro-claro)}
+.globe{position:absolute;right:-90px;top:-40px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,rgba(27,110,194,.5),rgba(10,37,64,0) 62%);
+  opacity:.6;z-index:1}
+
+/* ---------- LAYOUT ---------- */
+main{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:52px 0;border-bottom:1px solid var(--linha)}
+.eyebrow{color:var(--ceu);font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--ouro)}
+h2{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.5px;color:var(--imperial);line-height:1.12;margin-bottom:8px}
+h3{font-size:19px;font-weight:800;color:var(--imperial-2);margin:26px 0 10px;font-family:"Helvetica Neue",Arial,sans-serif}
+p.lead{font-size:18.5px;color:#33383e;max-width:74ch;margin-top:10px}
+p{max-width:74ch;margin-top:14px;color:#2c3137}
+.small{font-size:13.5px;color:var(--cinza)}
+a.src{color:var(--ceu);text-decoration:none;border-bottom:1px dotted var(--ceu)}
+a.src:hover{color:var(--imperial)}
+
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+.metric{background:var(--branco);border:1px solid var(--linha);border-top:4px solid var(--imperial);
+  padding:20px 18px;border-radius:3px;box-shadow:0 1px 2px rgba(10,37,64,.04)}
+.metric.gold{border-top-color:var(--ouro)}
+.metric.warn{border-top-color:var(--alerta)}
+.metric.water{border-top-color:var(--agua)}
+.metric-num{font-size:30px;font-weight:800;color:var(--imperial);letter-spacing:-1px;line-height:1}
+.metric.warn .metric-num{color:var(--alerta)}
+.metric.water .metric-num{color:var(--agua)}
+.metric.gold .metric-num{color:#a5851d}
+.metric-lab{font-size:12.5px;color:var(--cinza);font-weight:600;margin-top:8px;line-height:1.35}
+.metric-sub{font-size:11.5px;color:#8b95a0;margin-top:6px;font-style:italic;font-family:Georgia,serif}
+
+/* callout */
+.callout{border-left:4px solid var(--ouro);background:linear-gradient(90deg,rgba(201,162,39,.07),transparent);
+  padding:18px 22px;margin:26px 0;border-radius:0 4px 4px 0}
+.callout.warn{border-left-color:var(--alerta);background:linear-gradient(90deg,rgba(178,58,46,.06),transparent)}
+.callout.water{border-left-color:var(--agua);background:linear-gradient(90deg,rgba(42,125,140,.06),transparent)}
+.callout .k{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ouro);display:block;margin-bottom:6px}
+.callout.warn .k{color:var(--alerta)}
+.callout.water .k{color:var(--agua)}
+
+/* cards grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
+.card{background:var(--branco);border:1px solid var(--linha);border-radius:4px;padding:22px;box-shadow:0 1px 3px rgba(10,37,64,.05)}
+.card h3{margin-top:0}
+
+/* chart wrap */
+.chartbox{background:var(--branco);border:1px solid var(--linha);border-radius:4px;padding:20px 22px 14px;margin-top:22px}
+.chartbox .cap{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--cinza);margin-top:12px;border-top:1px solid var(--linha);padding-top:10px}
+.chart-h{height:320px;position:relative}
+.chart-h.tall{height:420px}
+
+/* map */
+#map{height:560px;border:1px solid var(--linha);border-radius:4px;margin-top:24px;z-index:1}
+.mapctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.mapctl .lab{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;font-weight:700;color:var(--cinza);margin-right:4px}
+.btn{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;font-weight:600;border:1px solid var(--linha);
+  background:var(--branco);color:var(--imperial-2);padding:8px 14px;border-radius:3px;cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--ceu)}
+.btn.on{background:var(--imperial);color:#fff;border-color:var(--imperial)}
+.legend{background:var(--branco);border:1px solid var(--linha);border-radius:4px;padding:12px 14px;margin-top:14px;
+  display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--cinza);font-family:"Helvetica Neue",Arial,sans-serif}
+.legend span{display:flex;align-items:center;gap:7px}
+.dot{width:13px;height:13px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.leaflet-popup-content{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+.leaflet-popup-content b{color:var(--imperial)}
+.pop-reg{font-size:11px;color:#fff;background:var(--ceu);padding:2px 7px;border-radius:2px;font-weight:700}
+.pop-row{display:flex;justify-content:space-between;gap:18px;margin-top:3px;border-top:1px solid #eee;padding-top:3px}
+
+/* table */
+table{border-collapse:collapse;width:100%;margin-top:22px;font-size:13.5px;background:var(--branco);border:1px solid var(--linha)}
+th{background:var(--imperial);color:#fff;text-align:left;padding:11px 13px;font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+td{padding:10px 13px;border-top:1px solid var(--linha)}
+tr:nth-child(even) td{background:#faf8f2}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:2px;letter-spacing:.4px}
+.tag.n{background:rgba(178,58,46,.12);color:var(--alerta)}
+.tag.s{background:rgba(63,125,78,.14);color:var(--verde)}
+
+/* timeline */
+.tl{margin-top:28px;border-left:2px solid var(--linha);padding-left:0}
+.tl-item{position:relative;padding:0 0 26px 30px;margin-left:2px}
+.tl-item::before{content:"";position:absolute;left:-8px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--ouro);border:3px solid var(--papel)}
+.tl-item.warn::before{background:var(--alerta)}
+.tl-item.water::before{background:var(--agua)}
+.tl-per{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;font-weight:800;color:var(--imperial);letter-spacing:.5px}
+.tl-txt{font-size:15px;margin-top:3px;color:#33383e}
+
+/* recommendations */
+.rec{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:26px}
+.rec .r{background:var(--branco);border:1px solid var(--linha);border-radius:4px;padding:18px 18px 20px;border-top:3px solid var(--ceu)}
+.rec .r .pr{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ceu)}
+.rec .r.imed{border-top-color:var(--alerta)}
+.rec .r.imed .pr{color:var(--alerta)}
+.rec .r h4{font-family:"Helvetica Neue",Arial,sans-serif;font-size:15px;color:var(--imperial);margin:6px 0 6px}
+.rec .r p{font-size:13.5px;margin-top:0;color:#3a4048}
+
+/* footer */
+footer{background:var(--imperial);color:#c6d2e2;padding:40px 24px;border-top:4px solid var(--ouro)}
+footer .wrap{max-width:1180px;margin:0 auto;font-family:"Helvetica Neue",Arial,sans-serif}
+footer h4{color:#fff;font-size:14px;margin-bottom:10px}
+footer p{color:#9fb0c4;font-size:12.5px;max-width:none;margin-top:6px}
+footer a{color:var(--ouro-claro);text-decoration:none}
+.disc{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:16px 18px;margin-top:22px;font-size:12px;color:#b8c6d8;line-height:1.6}
+.disc b{color:var(--ouro-claro)}
+
+@media(max-width:820px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .grid2{grid-template-columns:1fr}
+  nav .brand{display:none}
+}
+@media(max-width:520px){.metrics{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="brand">SEDEC·RJ <b>/</b> NI²AD</div>
+  <a href="#panorama" class="active">Panorama</a>
+  <a href="#clima">Clima Sazonal</a>
+  <a href="#hidrico">Recursos Hídricos</a>
+  <a href="#fogo">Risco de Fogo</a>
+  <a href="#agro">Agropecuária</a>
+  <a href="#mapa">Webmap Municipal</a>
+  <a href="#cenario">Cenário & Ações</a>
+</nav>
+
+<header class="hero">
+  <div class="globe"></div>
+  <div class="wrap">
+    <div class="eyebrow">Governo do Estado do Rio de Janeiro · Defesa Civil · Boletim Analítico</div>
+    <h1>El Niño <em>2026–2027</em><br>Recorte Sudeste &amp; Rio de Janeiro</h1>
+    <p class="sub">Leitura estadual do Painel El Niño 2026-2027 (Boletim Nº 02 · Julho/2026), cruzada com os dados agropecuários oficiais da EMATER-RIO (ASPA 2025) para dimensionar exposição hídrica, risco de fogo e vulnerabilidade agrícola nos 92 municípios fluminenses.</p>
+    <div class="meta">
+      <span class="chip">Fonte primária: <b>Painel El Niño Nº02</b> · INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM</span>
+      <span class="chip">Base agrícola: <b>ASPA 2025</b> · EMATER-RIO</span>
+      <span class="chip">Evento: <b>El Niño confirmado</b> (11/06/2026)</span>
+      <span class="chip">Projeção OND: <b>81%</b> muito forte (≥2,0 °C)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== PANORAMA ===================== -->
+<section id="panorama">
+  <div class="eyebrow">1 · Panorama Executivo</div>
+  <h2>O que o Painel Nº 02 estabelece — e por que importa para o Rio</h2>
+  <p class="lead">O NOAA decretou condições de El Niño em 11 de junho de 2026. Os modelos indicam 100% de probabilidade de permanência do fenômeno até, ao menos, o início de 2027, com 81% de chance de atingir a categoria <em>muito forte</em> (anomalia de TSM ≥ 2,0 °C) no trimestre outubro-novembro-dezembro.</p>
+  <p>Para o Sudeste, a previsão sazonal ASO (agosto-setembro-outubro) aponta <b>temperaturas acima da média em praticamente todo o território</b>, favorecendo ondas de calor, baixa umidade relativa e maior potencial de queimadas. O Painel registra que, em junho de 2026, a seca no Sudeste já é <b>mais abrangente (76% da Região) e mais intensa (2% de seca grave)</b> do que no mesmo período de 2023 — quando começou o último episódio de El Niño. O documento adverte: se a próxima estação chuvosa atrasar ou for desfavorável, "a situação pode se agravar rapidamente entre a primavera e o verão".</p>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-num">100%</div><div class="metric-lab">Probabilidade de permanência do El Niño até o início de 2027</div><div class="metric-sub">Painel Nº02, pág. 2</div></div>
+    <div class="metric warn"><div class="metric-num">76%</div><div class="metric-lab">Do Sudeste sob seca em jun/2026 (2% em seca grave)</div><div class="metric-sub">Monitor de Secas / ANA</div></div>
+    <div class="metric gold"><div class="metric-num">81%</div><div class="metric-lab">Chance de El Niño muito forte no trimestre OND 2026</div><div class="metric-sub">NOAA CPC · pág. 4</div></div>
+    <div class="metric water"><div class="metric-num">2</div><div class="metric-lab">Unidades de Conservação do RJ/ES já em seca severa (Rebio União)</div><div class="metric-sub">CEMADEN · IIS-3 · pág. 20</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="k">Leitura NI²AD</span>
+    O Painel não traz uma seção dedicada ao Rio de Janeiro, mas cita o estado três vezes de forma operacionalmente relevante: (1) a <b>Reserva Biológica União (RJ)</b> mantém condição de <b>seca severa</b> no Índice Integrado de Seca; (2) a bacia do <b>Paraíba do Sul</b> tem reunião de crise agendada — a 113ª do GAOPS, em 11/08/2026; e (3) o Sudeste inteiro entra no grupo de "chuvas abaixo da média + temperaturas acima da média" para o trimestre ASO. Este relatório parte desses três ganchos oficiais.
+  </div>
+</section>
+
+<!-- ===================== CLIMA ===================== -->
+<section id="clima">
+  <div class="eyebrow">2 · Previsão Climática Sazonal (ASO 2026)</div>
+  <h2>Sudeste: calor acima da média e chuva desigual</h2>
+  <p>A previsão multi-modelo CPTEC/INMET/FUNCEME para agosto-setembro-outubro coloca o Sudeste num padrão consistente de El Niño: maior probabilidade de precipitação <b>abaixo da faixa normal no centro-norte</b> da região, enquanto a condição de chuva acima da média se restringe ao sul do Sudeste (sul de São Paulo). Para a temperatura, o sinal é inequívoco — <b>acima da normal em praticamente todo o País</b>.</p>
+  <p>Para o Rio de Janeiro isso desenha uma geografia de risco interna: o <b>Noroeste Fluminense</b> e o <b>Norte</b> — porções mais setentrionais e continentais do estado — são os mais expostos ao déficit de chuva combinado a calor elevado. Justamente onde se concentra a cafeicultura fluminense (ver seção 5).</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>O que o Painel projeta para o Sudeste</h3>
+      <p class="small">Síntese textual da Figura 3 e da seção Agropecuária do Boletim Nº02:</p>
+      <ul style="margin:12px 0 0 18px;font-size:14.5px;line-height:1.7">
+        <li>Precipitação abaixo da média no centro-norte do Sudeste; acima da média apenas no extremo sul (sul de SP/MS).</li>
+        <li>Temperatura acima da normal em toda a região → ondas de calor e baixa umidade.</li>
+        <li>Colheita de culturas de inverno e 2ª safra <b>favorecida</b> pela secagem natural.</li>
+        <li>Cana-de-açúcar, citros, pastagens e perenes <b>ameaçadas</b> pela restrição hídrica.</li>
+        <li>Preparo de solo para a safra de verão dificultado pela baixa recarga.</li>
+      </ul>
+    </div>
+    <div class="chartbox">
+      <div class="chart-h"><canvas id="chartTSM"></canvas></div>
+      <div class="cap">Anomalias de TSM observadas no Pacífico Equatorial (últimas semanas de julho/2026). Fonte: Painel El Niño Nº02, seção 1 (dados NCEP). O aquecimento cresce do Niño 3.4 (central) ao Niño 1+2 (costa oeste da América do Sul).</div>
+    </div>
+  </div>
+</section>
+<!-- ===================== HÍDRICO ===================== -->
+<section id="hidrico">
+  <div class="eyebrow">3 · Recursos Hídricos — Bacia do Paraíba do Sul</div>
+  <h2>A segurança hídrica da Região Metropolitana em observação</h2>
+  <p class="lead">O sistema Paraíba do Sul / Guandu abastece a maior parte da Região Metropolitana do Rio. O Painel Nº02 coloca a bacia sob acompanhamento formal: a <b>113ª reunião do GAOPS</b> (Grupo de Assessoramento à Operação do Sistema Hidráulico Paraíba do Sul) está marcada para <b>11/08/2026</b>, e a <b>Reserva Biológica União (RJ)</b> aparece entre as poucas Unidades de Conservação do país já classificadas em <b>seca severa</b> no Índice Integrado de Seca (IIS-3) do trimestre maio-junho-julho.</p>
+
+  <div class="callout water">
+    <span class="k">Contexto de bacia — Painel Nº02</span>
+    No panorama nacional de reservatórios, o Painel destaca que o <b>Sistema Cantareira</b> (RMSP, bacia vizinha do alto Paraná/PCJ) voltou a uma condição próxima da normalidade em julho <b>após 28 meses consecutivos de seca</b>. É um alerta indireto para o Sudeste: a recuperação hídrica da região vinha de um déficit prolongado, e um El Niño forte pressiona a recarga logo na largada do segundo semestre seco.
+  </div>
+
+  <h3>Sinais hídricos que o RJ deve monitorar no 2º semestre</h3>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="font-size:16px">Rios e bacias</h3>
+      <p class="small" style="margin-top:2px">O modelo hidrológico do CEMADEN (MHD) prevê continuidade da recessão das vazões nos principais rios do país no próximo mês, permanecendo abaixo da média histórica. No Sudeste, persistem condições mais críticas na porção média-baixa do rio Paraná e seca extrema no Paranapanema — bacias de geração e transição que influenciam o balanço energético regional.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px">Demanda evaporativa</h3>
+      <p class="small" style="margin-top:2px">O Painel é explícito para o Sudeste: mesmo sem correlação direta entre El Niño e volume de chuva na região, as <b>temperaturas acima da média elevam a demanda evaporativa</b>, intensificando a perda de umidade do solo. Em ano de reservatórios ainda em recuperação, isso antecipa e aprofunda qualquer estiagem.</p>
+    </div>
+  </div>
+
+  <div class="chartbox">
+    <div class="chart-h"><canvas id="chartRes"></canvas></div>
+    <div class="cap">Reservatórios prioritários do SIN citados no Painel Nº02 (volume útil, referência 27/07/2026). Os reservatórios da bacia do São Francisco e do Paranapanema são apresentados como referência do panorama nacional — o Paraíba do Sul não teve percentual publicado neste boletim, e por isso <b>não é estimado aqui</b>. Fonte: Painel Nº02, seção 4 (dados ANA/ONS).</div>
+  </div>
+</section>
+
+<!-- ===================== FOGO ===================== -->
+<section id="fogo">
+  <div class="eyebrow">4 · Risco de Fogo</div>
+  <h2>Alerta de incêndio expande-se sobre o Sudeste</h2>
+  <p class="lead">Para o trimestre agosto-outubro, o Painel registra <b>expansão das áreas em condição de "Alerta" sobre o Sudeste</b>, com destaque para Minas Gerais, refletindo a consolidação da estação seca combinada a temperaturas acima da média. A previsão de fogo do INPE-INMET-FUNCEME parte de chuva abaixo da média em quase todo o Brasil (exceto Sul).</p>
+  <p>O documento pondera que outros modelos internacionais apontam cenário menos pessimista para Sudeste e Centro-Oeste (chuva acima da média), o que tornaria o risco de fogo menos crítico. Para a Defesa Civil fluminense, a leitura prudente é preparar-se para o cenário mais severo enquanto se acompanha a evolução mensal.</p>
+
+  <div class="callout warn">
+    <span class="k">Janela crítica</span>
+    O período de maior atenção para incêndios florestais no Rio de Janeiro é <b>agosto a novembro</b>, coincidindo com a estação seca e o pico da demanda evaporativa projetada. As áreas de vegetação nativa serrana e as porções Norte/Noroeste — mais quentes e secas no cenário ASO — concentram o risco.
+  </div>
+</section>
+<!-- ===================== AGRO ===================== -->
+<section id="agro">
+  <div class="eyebrow">5 · Agropecuária Fluminense — Base ASPA 2025 / EMATER-RIO</div>
+  <h2>Onde o calor e a seca do El Niño encontram a lavoura do Rio</h2>
+  <p class="lead">A base ASPA 2025 (EMATER-RIO) registra <b>R$ 4,58 bilhões</b> de faturamento bruto agrícola em <b>144,7 mil hectares</b> colhidos no estado. Cruzando essa base com a previsão sazonal do Painel, o ponto de maior exposição é claro: a <b>cafeicultura</b>, cuja florada (setembro-novembro) coincide exatamente com a janela de calor extremo e déficit hídrico projetada para o Norte/Noroeste.</p>
+
+  <div class="metrics">
+    <div class="metric gold"><div class="metric-num">R$ 4,58 bi</div><div class="metric-lab">Faturamento bruto agrícola do RJ (ASPA 2025)</div><div class="metric-sub">EMATER-RIO · 86 de 92 municípios com produção</div></div>
+    <div class="metric"><div class="metric-num">12.505 ha</div><div class="metric-lab">Área de café arábica no estado</div><div class="metric-sub">2.986 produtores · R$ 764 mi</div></div>
+    <div class="metric warn"><div class="metric-num">79%</div><div class="metric-lab">Do café arábica está em Varre-Sai + Porciúncula (Noroeste)</div><div class="metric-sub">Zona de déficit de chuva no cenário ASO</div></div>
+    <div class="metric water"><div class="metric-num">144,7 mil ha</div><div class="metric-lab">Área colhida total do estado</div><div class="metric-sub">Todas as culturas · ASPA 2025</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:30px">
+    <div class="chartbox">
+      <div class="chart-h"><canvas id="chartReg"></canvas></div>
+      <div class="cap">Faturamento bruto agrícola por região administrativa da EMATER-RIO (R$ milhões). A Região Serrana lidera em valor; Norte lidera em área. Fonte: ASPA 2025.</div>
+    </div>
+    <div class="chartbox">
+      <div class="chart-h"><canvas id="chartCoffee"></canvas></div>
+      <div class="cap">Concentração da área de café arábica (ha) por município. Varre-Sai e Porciúncula, no Noroeste Fluminense, respondem por quase 4/5 da área estadual — exatamente a porção mais exposta ao déficit de chuva projetado. Fonte: ASPA 2025.</div>
+    </div>
+  </div>
+
+  <h3>Impactos projetados pelo Painel para as culturas do Sudeste</h3>
+  <table>
+    <thead><tr><th>Cultura / grupo</th><th>Sinal do Painel (ASO 2026)</th><th>Exposição no RJ</th></tr></thead>
+    <tbody>
+      <tr><td><b>Café arábica</b></td><td>Calor + restrição hídrica na florada (set-nov) → risco de abortamento floral</td><td><span class="tag n">Alta</span> Noroeste (Varre-Sai, Porciúncula)</td></tr>
+      <tr><td><b>Cana-de-açúcar</b></td><td>Perenes e semiperenes afetadas pela restrição hídrica e calor</td><td><span class="tag n">Média-Alta</span> Norte (Campos, S. F. Itabapoana)</td></tr>
+      <tr><td><b>Citros (laranja/tangerina)</b></td><td>Citros explicitamente citados como afetados no Sudeste</td><td><span class="tag n">Média</span> Centro e Noroeste</td></tr>
+      <tr><td><b>Olerícolas (folhas/frutos)</b></td><td>Culturas de inverno: colheita favorecida pela secagem; irrigação sob pressão</td><td><span class="tag s">Mista</span> Serrana (Nova Friburgo, Teresópolis)</td></tr>
+      <tr><td><b>Pastagens</b></td><td>Redução de forragem e disponibilidade de água para pecuária</td><td><span class="tag n">Média</span> Norte e Noroeste</td></tr>
+      <tr><td><b>Grãos 2ª safra</b></td><td>Colheita favorecida pela estação seca</td><td><span class="tag s">Favorável</span> pontual</td></tr>
+    </tbody>
+  </table>
+  <p class="small" style="margin-top:14px">A coluna "Sinal do Painel" reproduz a seção Agropecuária/Sudeste do Boletim Nº02 (pág. 17 e Figura 13). A coluna "Exposição no RJ" cruza esse sinal com a distribuição geográfica das culturas na base ASPA 2025 — é a leitura analítica do NI²AD, não uma projeção quantitativa de perda.</p>
+</section>
+
+<!-- ===================== MAPA ===================== -->
+<section id="mapa">
+  <div class="eyebrow">6 · Webmap Municipal</div>
+  <h2>Os 92 municípios do Rio, por exposição</h2>
+  <p>O mapa cobre <b>todos os 92 municípios fluminenses</b>, cada um identificado pelo seu <b>código IBGE</b> — 86 com produção agrícola consolidada na ASPA 2025 e 6 sem produção agregável (marcados em cinza tracejado). Alterne as camadas para ler o território por <b>faturamento agrícola</b>, por <b>região da EMATER</b> ou destacando os <b>municípios cafeeiros</b> — os de maior exposição ao cenário El Niño. Clique em um marcador para o detalhe, incluindo o código IBGE que permite cruzar com bases oficiais.</p>
+
+  <div class="mapctl">
+    <span class="lab">Camada:</span>
+    <button class="btn on" data-layer="fat">Faturamento agrícola</button>
+    <button class="btn" data-layer="reg">Região EMATER</button>
+    <button class="btn" data-layer="coffee">Exposição cafeeira</button>
+  </div>
+  <div id="map"></div>
+  <div class="legend" id="legend"></div>
+  <p class="small" style="margin-top:14px">Identificação: <b>código IBGE de 7 dígitos</b> (DTB oficial) para os 92 municípios — chave que permite casar cada ponto com bases do IBGE Cidades@, DataSUS, SNIS e SINGED Lab Desastres. Coordenadas: sedes municipais (posições geográficas públicas e estáveis). Dados de produção: ASPA 2025 / EMATER-RIO. Os 6 municípios em cinza tracejado (Belford Roxo, Mesquita, Nilópolis, São João de Meriti, Arraial do Cabo, Itatiaia) não apresentam produção agrícola agregável na ASPA — em geral áreas urbanas densas da RM ou de vocação não-agrícola.</p>
+</section>
+
+<!-- ===================== CENÁRIO ===================== -->
+<section id="cenario">
+  <div class="eyebrow">7 · Cenário Projetado &amp; Ações</div>
+  <h2>Linha do tempo El Niño para o Rio de Janeiro</h2>
+  <p>Síntese temporal construída a partir dos sinais do Painel Nº02, ancorada nas datas e marcos que o próprio boletim estabelece.</p>
+
+  <div class="tl">
+    <div class="tl-item warn">
+      <div class="tl-per">AGO–OUT 2026 · TRIMESTRE ASO</div>
+      <div class="tl-txt">Calor acima da média em todo o Sudeste; consolidação da estação seca. Expansão de alerta de fogo sobre a região. Demanda evaporativa elevada pressiona solos e reservatórios em recuperação. <b>Janela de florada do café</b> sob calor e déficit hídrico no Noroeste.</div>
+    </div>
+    <div class="tl-item water">
+      <div class="tl-per">11/08/2026 · GAOPS PARAÍBA DO SUL</div>
+      <div class="tl-txt">113ª reunião do Grupo de Assessoramento à Operação do Sistema Hidráulico Paraíba do Sul (ANA). Marco de acompanhamento formal da bacia que abastece a RM do Rio — ponto de coleta de dados de vazão e operação de reservatórios.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-per">OUT–DEZ 2026 · PICO DO EVENTO</div>
+      <div class="tl-txt">Janela de 81% de probabilidade de El Niño <b>muito forte</b> (TSM ≥ 2,0 °C). Se a estação chuvosa atrasar, o Painel adverte que "a situação pode se agravar rapidamente entre a primavera e o verão" no Sudeste.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-per">VERÃO 2026–27 · TRANSIÇÃO</div>
+      <div class="tl-txt">Modelos sinalizam possível retorno de chuvas, com condição acima da média restrita ao sul do Sudeste. Persistência de incerteza — recomendação do Painel é acompanhamento mensal contínuo.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:38px">Recomendações operacionais — alinhadas ao Painel</h3>
+  <div class="rec">
+    <div class="r imed">
+      <div class="pr">Imediata</div>
+      <h4>Prontidão de combate a incêndio</h4>
+      <p>Posicionar brigadas e recursos para a janela ago–nov, priorizando vegetação nativa serrana e as porções Norte/Noroeste, mais quentes e secas no cenário ASO.</p>
+    </div>
+    <div class="r imed">
+      <div class="pr">Imediata</div>
+      <h4>Monitorar Paraíba do Sul</h4>
+      <p>Acompanhar as reuniões do GAOPS e os dados de vazão/reservatório da bacia, dado o papel do sistema Guandu no abastecimento da RM do Rio.</p>
+    </div>
+    <div class="r">
+      <div class="pr">Curto prazo</div>
+      <h4>Revisar planos de contingência</h4>
+      <p>Atualizar instrumentos de planejamento para cenário de estiagem prolongada e onda de calor, conforme recomendação direta do Painel aos estados e municípios.</p>
+    </div>
+    <div class="r">
+      <div class="pr">Curto prazo</div>
+      <h4>Alerta à cafeicultura</h4>
+      <p>Articular com EMATER-RIO orientação de manejo e irrigação para os polos cafeeiros do Noroeste antes da florada de setembro.</p>
+    </div>
+    <div class="r">
+      <div class="pr">Contínua</div>
+      <h4>Cadastro de alertas (DCA)</h4>
+      <p>Ampliar adesão da população ao Defesa Civil Alerta (Cell Broadcast) nas áreas de risco, conforme orientação do boletim à população.</p>
+    </div>
+    <div class="r">
+      <div class="pr">Estratégica</div>
+      <h4>Articulação intersetorial</h4>
+      <p>Integrar recursos hídricos, meio ambiente, saúde e assistência social no acompanhamento do evento, no âmbito do SINPDEC.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <h4>Nota metodológica e de proveniência dos dados</h4>
+    <p><b style="color:#e6c65c">Fontes reais utilizadas:</b> (1) Painel El Niño 2026-2027, Boletim Mensal Nº 02 — Julho/2026, ação conjunta INMET, INPE, ANA, CEMADEN, SGB, SEDEC e CENSIPAM (documento anexado, 29 páginas); (2) ASPA 2025 — Análise de Situação e Perspectivas Agropecuárias, EMATER-RIO (planilha oficial anexada, safra 2025).</p>
+    <p style="margin-top:10px">Todos os números agrícolas (faturamento, área, produção, café por município) são extraídos diretamente da planilha ASPA 2025. Todas as afirmações climáticas, probabilidades, percentuais de seca e projeções sazonais são citações diretas do Painel Nº02. As coordenadas municipais são posições geográficas das sedes das cidades. Os <b>códigos IBGE (7 dígitos, DTB oficial)</b> dos 92 municípios foram validados contra o portal IBGE Cidades@ — e permitem cruzar cada município com bases federais.</p>
+    <p style="margin-top:10px"><b style="color:#e6c65c">Fontes de acompanhamento recomendadas</b> para preencher as lacunas quantitativas com rastreabilidade: <a href="https://www.ibge.gov.br/singedlab-desastres">SINGED Lab Desastres (IBGE)</a> — plataforma de dados de população em área de risco, manchas de inundação e domicílios atingidos por município; <a href="https://www.ibge.gov.br/cidades-e-estados/rj/">IBGE Cidades@</a> — população, PIB, área territorial oficiais por município; ANA/HidroWeb e Sala GAOPS (vazões e reservatórios do Paraíba do Sul); INPE/BDQueimadas (focos de calor); INMET (séries meteorológicas).</p>
+
+    <div class="disc">
+      <b>Transparência sobre o que NÃO foi incluído.</b> Você solicitou "apenas dados reais e validados, sem inventar nada". Por isso este relatório <b>não contém</b> séries que eu não pude validar contra uma fonte concreta: não há percentuais de volume do reservatório de Paraibuna/Funil ao longo do tempo, contagem de focos de incêndio por ano no RJ, séries de precipitação/temperatura por município, nem projeções quantitativas de perda de safra. O Painel Nº02 não publica esses valores para o Rio de Janeiro, e eu não tenho acesso a uma base ("Data Ocean") que os forneça de forma verificável. Onde o Painel cita o RJ, a citação está identificada. As demais leituras são análises qualitativas explicitamente marcadas como "leitura NI²AD" (as fontes para preencher as lacunas quantitativas estão listadas acima).</p>
+    </div>
+
+    <p style="margin-top:20px;font-size:11.5px;color:#7f90a6">Produzido para uso institucional — NI²AD · Núcleo Integrado de Inteligência para Apoio à Decisão · FE-SEDEC · Secretaria de Estado de Defesa Civil do Rio de Janeiro. Documento analítico de apoio à decisão; não substitui os boletins e alertas oficiais dos órgãos citados. Referências de acompanhamento contínuo: <a href="https://portal.inmet.gov.br">INMET</a> · <a href="https://painelalertas.cemaden.gov.br">CEMADEN</a> · <a href="https://www.rj.gov.br/emater">EMATER-RIO</a>.</p>
+  </div>
+</footer>
+
+<script>
+const DATA = {"muni":[{"m":"Nova Friburgo","reg":"SERRANA","lat":-22.2819,"lon":-42.5311,"fat":461910450,"area":4449.0,"prod":107552,"top":["MORANGO","ALFACE","COUVE FLOR"],"cod":"3303401"},{"m":"São Francisco de Itabapoana","reg":"NORTE","lat":-21.4708,"lon":-41.1103,"fat":423566900,"area":27745.5,"prod":1213674,"top":["ABACAXI","CANA DE AÇUCAR","AIPIM"],"cod":"3304755"},{"m":"Teresópolis","reg":"SERRANA","lat":-22.4122,"lon":-42.9656,"fat":384233259,"area":4661.1,"prod":126788,"top":["ALFACE","COUVE","CEBOLINHA"],"cod":"3305802"},{"m":"Sumidouro","reg":"SERRANA","lat":-22.0489,"lon":-42.6764,"fat":361330565,"area":5895.0,"prod":147056,"top":["ALFACE","COUVE","TOMATE"],"cod":"3305703"},{"m":"Porciúncula","reg":"NOROESTE","lat":-20.9636,"lon":-42.0439,"fat":338352155,"area":5573.9,"prod":20808,"top":["CAFÉ ARÁBICA","LARANJA","TANGERINA"],"cod":"3304102"},{"m":"Varre-Sai","reg":"NOROESTE","lat":-20.9281,"lon":-41.8703,"fat":334690812,"area":5484.8,"prod":14578,"top":["CAFÉ ARÁBICA","MILHO","TOMATE"],"cod":"3306156"},{"m":"Campos dos Goytacazes","reg":"NORTE","lat":-21.7622,"lon":-41.3181,"fat":279302695,"area":39697.9,"prod":1814599,"top":["CANA DE AÇUCAR","ABACAXI","SOJA"],"cod":"3301009"},{"m":"Bom Jardim","reg":"SERRANA","lat":-22.1525,"lon":-42.4189,"fat":164786380,"area":2243.0,"prod":35268,"top":["TOMATE","CAFÉ ARÁBICA","INHAME"],"cod":"3300506"},{"m":"Paty do Alferes","reg":"SUL","lat":-22.43,"lon":-43.4283,"fat":144180524,"area":391.3,"prod":21509,"top":["PIMENTÃO-CULT.PROTG","TOMATE","TOMATE - CULT.PROTG"],"cod":"3303856"},{"m":"Araruama","reg":"CENTRO","lat":-22.8728,"lon":-42.3431,"fat":138952290,"area":5222.9,"prod":201889,"top":["LARANJA","CANA DE AÇUCAR","LIMÃO"],"cod":"3300209"},{"m":"São José do Vale do Rio Preto","reg":"SERRANA","lat":-22.1522,"lon":-42.9308,"fat":131280925,"area":2520.8,"prod":106692,"top":["CHUCHU","CAFÉ ARÁBICA","TANGERINA PONCÃ"],"cod":"3305158"},{"m":"Trajano de Moraes","reg":"SERRANA","lat":-22.0644,"lon":-42.0644,"fat":100836145,"area":1679.1,"prod":32834,"top":["TOMATE","BANANA NANICA","BANANA PRATA"],"cod":"3305901"},{"m":"Cachoeiras de Macacu","reg":"CENTRO","lat":-22.4631,"lon":-42.6528,"fat":95963265,"area":5385.6,"prod":59071,"top":["GOIABA","AIPIM","QUIABO"],"cod":"3300803"},{"m":"Tanguá","reg":"CENTRO","lat":-22.7392,"lon":-42.7192,"fat":85681300,"area":1570.5,"prod":35117,"top":["LARANJA","LIMÃO","AIPIM"],"cod":"3305752"},{"m":"Cambuci","reg":"NOROESTE","lat":-21.5758,"lon":-41.9142,"fat":85301610,"area":1258.5,"prod":39519,"top":["TOMATE","MILHO FORRAGEIRO","JILÓ"],"cod":"3300902"},{"m":"Rio de Janeiro","reg":"CENTRO","lat":-22.9068,"lon":-43.1729,"fat":61224720,"area":2094.7,"prod":30732,"top":["AIPIM","COCO VERDE","CHUCHU"],"cod":"3304557"},{"m":"Rio Bonito","reg":"CENTRO","lat":-22.7181,"lon":-42.6244,"fat":49987770,"area":1487.9,"prod":21593,"top":["LARANJA","LIMÃO","TANGERINA PONCÃ"],"cod":"3304300"},{"m":"Duas Barras","reg":"SERRANA","lat":-22.0522,"lon":-42.5222,"fat":49105695,"area":806.8,"prod":17280,"top":["CAFÉ ARÁBICA","TANGERINA PONCÃ","TOMATE"],"cod":"3301603"},{"m":"Paraíba do Sul","reg":"SUL","lat":-22.1592,"lon":-43.2933,"fat":47561249,"area":219.1,"prod":10349,"top":["TOMATE","PIMENTÃO-CULT.PROTG","TOMATE - CULT.PROTG"],"cod":"3303708"},{"m":"Silva Jardim","reg":"CENTRO","lat":-22.6572,"lon":-42.3961,"fat":46950240,"area":2112.5,"prod":30552,"top":["MILHO FORRAGEIRO","LARANJA","PALMITO"],"cod":"3305604"},{"m":"Bom Jesus do Itabapoana","reg":"NOROESTE","lat":-21.1344,"lon":-41.6803,"fat":46526186,"area":998.6,"prod":4790,"top":["CAFÉ ARÁBICA","TOMATE","MILHO FORRAGEIRO"],"cod":"3300605"},{"m":"São Sebastião do Alto","reg":"SERRANA","lat":-21.9578,"lon":-42.1367,"fat":41996520,"area":491.0,"prod":16400,"top":["TOMATE","QUIABO","PEPINO"],"cod":"3305307"},{"m":"Magé","reg":"CENTRO","lat":-22.6531,"lon":-43.0408,"fat":40832025,"area":997.7,"prod":11399,"top":["AIPIM","MILHO VERDE","QUIABO"],"cod":"3302502"},{"m":"Casimiro de Abreu","reg":"CENTRO","lat":-22.4808,"lon":-42.2044,"fat":35289960,"area":1119.4,"prod":14278,"top":["INHAME","AIPIM","BANANA PRATA"],"cod":"3301306"},{"m":"Sapucaia","reg":"SERRANA","lat":-21.995,"lon":-42.9142,"fat":33575920,"area":573.4,"prod":16818,"top":["TANGERINA PONCÃ","TOMATE","PIMENTÃO"],"cod":"3305406"},{"m":"São João da Barra","reg":"NORTE","lat":-21.6403,"lon":-41.0511,"fat":33420885,"area":843.5,"prod":19734,"top":["ABACAXI","COCO VERDE","QUIABO"],"cod":"3305000"},{"m":"São José de Ubá","reg":"NOROESTE","lat":-21.3661,"lon":-41.9506,"fat":33173460,"area":686.8,"prod":18421,"top":["TOMATE","MILHO FORRAGEIRO","PEPINO"],"cod":"3305133"},{"m":"Petrópolis","reg":"SUL","lat":-22.505,"lon":-43.1789,"fat":33003100,"area":444.6,"prod":9550,"top":["COUVE","BROCOLOS","CHUCHU"],"cod":"3303906"},{"m":"Guapimirim","reg":"CENTRO","lat":-22.5372,"lon":-42.9903,"fat":32139959,"area":1242.6,"prod":10868,"top":["MILHO VERDE","GOIABA","AIPIM"],"cod":"3301850"},{"m":"Vassouras","reg":"SUL","lat":-22.4039,"lon":-43.6644,"fat":31952575,"area":318.1,"prod":5368,"top":["TOMATE - CULT.PROTG","PIMENTÃO-CULT.PROTG","TOMATE"],"cod":"3306206"},{"m":"Santa Maria Madalena","reg":"SERRANA","lat":-21.9556,"lon":-42.01,"fat":25257956,"area":812.0,"prod":10449,"top":["BANANA NANICA","BANANA PRATA","AIPIM"],"cod":"3304607"},{"m":"Itaocara","reg":"NOROESTE","lat":-21.6717,"lon":-42.0761,"fat":23180451,"area":506.4,"prod":10642,"top":["QUIABO","JILÓ","BERINJELA"],"cod":"3302106"},{"m":"Conceição de Macabu","reg":"NORTE","lat":-22.0836,"lon":-41.8697,"fat":22317170,"area":720.2,"prod":11016,"top":["AIPIM","BANANA PRATA","ABOBORA"],"cod":"3301405"},{"m":"Duque de Caxias","reg":"CENTRO","lat":-22.7856,"lon":-43.3117,"fat":21821254,"area":550.1,"prod":5453,"top":["AIPIM","BATATA DOCE","GOIABA"],"cod":"3301702"},{"m":"Itaguaí","reg":"CENTRO","lat":-22.8522,"lon":-43.7756,"fat":21472750,"area":559.0,"prod":6057,"top":["COCO VERDE","BANANA PRATA","GOIABA"],"cod":"3302007"},{"m":"Rio Claro","reg":"SUL","lat":-22.7203,"lon":-44.1408,"fat":20177919,"area":380.6,"prod":4603,"top":["COUVE","BANANA NANICA","BANANA PRATA"],"cod":"3304409"},{"m":"Seropédica","reg":"CENTRO","lat":-22.7442,"lon":-43.7078,"fat":19977623,"area":1132.7,"prod":9529,"top":["BANANA PRATA","QUIABO","BERTALHA"],"cod":"3305554"},{"m":"Paraty","reg":"SUL","lat":-23.2178,"lon":-44.7131,"fat":17329200,"area":241.1,"prod":2115,"top":["PALMITO","BANANA PRATA","AIPIM"],"cod":"3303807"},{"m":"Japeri","reg":"CENTRO","lat":-22.6433,"lon":-43.6531,"fat":15864378,"area":484.9,"prod":6234,"top":["AIPIM","QUIABO","BANANA PRATA"],"cod":"3302270"},{"m":"Italva","reg":"NOROESTE","lat":-21.43,"lon":-41.6944,"fat":14589049,"area":687.1,"prod":21540,"top":["TOMATE","PIMENTÃO","CANA DE AÇUCAR"],"cod":"3302056"},{"m":"Santo Antônio de Pádua","reg":"NOROESTE","lat":-21.5406,"lon":-42.1817,"fat":14515160,"area":152.0,"prod":3428,"top":["TOMATE","PIMENTÃO","JILÓ"],"cod":"3304706"},{"m":"Barra Mansa","reg":"SUL","lat":-22.5441,"lon":-44.1717,"fat":14324040,"area":652.2,"prod":5989,"top":["ALFACE","QUIABO","BROCOLOS"],"cod":"3300407"},{"m":"Macaé","reg":"NORTE","lat":-22.3708,"lon":-41.7869,"fat":14143350,"area":1329.5,"prod":13028,"top":["MILHO","SOJA","MILHO FORRAGEIRO"],"cod":"3302403"},{"m":"Nova Iguaçu","reg":"CENTRO","lat":-22.7592,"lon":-43.4511,"fat":12281000,"area":428.8,"prod":4873,"top":["AIPIM","QUIABO","BANANA NANICA"],"cod":"3303500"},{"m":"São Gonçalo","reg":"CENTRO","lat":-22.8267,"lon":-43.0539,"fat":11780205,"area":271.6,"prod":5318,"top":["CANA CALDO","LARANJA","AIPIM"],"cod":"3304904"},{"m":"Quissamã","reg":"NORTE","lat":-22.1028,"lon":-41.4694,"fat":11491600,"area":708.8,"prod":27230,"top":["COCO VERDE","CANA DE AÇUCAR","AIPIM"],"cod":"3304151"},{"m":"Mangaratiba","reg":"CENTRO","lat":-22.9597,"lon":-44.0406,"fat":11257440,"area":1154.7,"prod":5464,"top":["BANANA PRATA","AIPIM","PALMITO"],"cod":"3302601"},{"m":"Cabo Frio","reg":"CENTRO","lat":-22.8894,"lon":-42.0286,"fat":10265747,"area":1669.2,"prod":101094,"top":["CANA DE AÇUCAR","BANANA PRATA","AIPIM"],"cod":"3300704"},{"m":"Miracema","reg":"NOROESTE","lat":-21.4131,"lon":-42.1961,"fat":9893806,"area":97.7,"prod":2503,"top":["TOMATE","PIMENTÃO","BANANA PRATA"],"cod":"3303005"},{"m":"Carmo","reg":"SERRANA","lat":-21.9328,"lon":-42.6053,"fat":9390514,"area":312.1,"prod":9977,"top":["MILHO FORRAGEIRO","PEPINO","BERINJELA"],"cod":"3301207"},{"m":"Angra dos Reis","reg":"SUL","lat":-23.0067,"lon":-44.3181,"fat":9240000,"area":89.0,"prod":928,"top":["PALMITO","BANANA OURO","QUIABO"],"cod":"3300100"},{"m":"Itaperuna","reg":"NOROESTE","lat":-21.205,"lon":-41.8878,"fat":8903070,"area":155.0,"prod":2641,"top":["TOMATE","PIMENTÃO","CAFÉ CONILON"],"cod":"3302205"},{"m":"Itaboraí","reg":"CENTRO","lat":-22.7442,"lon":-42.8592,"fat":8391278,"area":271.4,"prod":2319,"top":["LIMÃO","LARANJA","TANGERINA PONCÃ"],"cod":"3301900"},{"m":"São Fidélis","reg":"NORTE","lat":-21.6444,"lon":-41.7472,"fat":7092581,"area":201.2,"prod":4154,"top":["TOMATE","QUIABO","BERINJELA"],"cod":"3304805"},{"m":"Maricá","reg":"CENTRO","lat":-22.9192,"lon":-42.8186,"fat":6988744,"area":254.0,"prod":2177,"top":["BANANA PRATA","BANANA NANICA","LIMÃO"],"cod":"3302700"},{"m":"Piraí","reg":"SUL","lat":-22.6272,"lon":-43.8981,"fat":6140436,"area":208.4,"prod":1336,"top":["BANANA NANICA","BANANA PRATA","ALFACE"],"cod":"3304003"},{"m":"Miguel Pereira","reg":"SUL","lat":-22.4572,"lon":-43.4803,"fat":6106735,"area":129.7,"prod":1440,"top":["BANANA PRATA","MARACUJÁ","PIMENTÃO"],"cod":"3302908"},{"m":"Barra do Piraí","reg":"SUL","lat":-22.47,"lon":-43.8256,"fat":5930984,"area":231.3,"prod":1092,"top":["CAFÉ ARÁBICA","BANANA NANICA","BANANA PRATA"],"cod":"3300308"},{"m":"Rio das Flores","reg":"SUL","lat":-22.1683,"lon":-43.5856,"fat":5889465,"area":194.7,"prod":7561,"top":["MILHO FORRAGEIRO","CAFÉ ARÁBICA","BANANA PRATA"],"cod":"3304508"},{"m":"Cordeiro","reg":"SERRANA","lat":-22.0281,"lon":-42.3611,"fat":5184950,"area":161.1,"prod":4391,"top":["MILHO FORRAGEIRO","TOMATE","CAQUI"],"cod":"3301504"},{"m":"Saquarema","reg":"CENTRO","lat":-22.92,"lon":-42.51,"fat":4835900,"area":464.0,"prod":1742,"top":["BANANA PRATA","COCO VERDE","PALMITO"],"cod":"3305505"},{"m":"Engenheiro Paulo de Frontin","reg":"SUL","lat":-22.5514,"lon":-43.6822,"fat":4356786,"area":85.8,"prod":612,"top":["BANANA NANICA","BANANA PRATA","ALFACE"],"cod":"3301801"},{"m":"Pinheiral","reg":"SUL","lat":-22.5147,"lon":-44.0022,"fat":3931022,"area":90.0,"prod":618,"top":["BANANA PRATA","BANANA NANICA","MORANGO"],"cod":"3303955"},{"m":"Aperibé","reg":"NOROESTE","lat":-21.6248,"lon":-42.1017,"fat":3824672,"area":99.7,"prod":1496,"top":["QUIABO","JILÓ","PIMENTÃO"],"cod":"3300159"},{"m":"Volta Redonda","reg":"SUL","lat":-22.5231,"lon":-44.1041,"fat":3412330,"area":40.1,"prod":660,"top":["SERRANA","NOROESTE","NORTE"],"cod":"3306305"},{"m":"Valença","reg":"SUL","lat":-22.2447,"lon":-43.7014,"fat":2566153,"area":62.0,"prod":1804,"top":["CANA CACHAÇA","CAFÉ ARÁBICA","PIMENTÃO-CULT.PROTG"],"cod":"3306100"},{"m":"Queimados","reg":"CENTRO","lat":-22.7161,"lon":-43.5553,"fat":2130748,"area":118.0,"prod":1600,"top":["AIPIM","QUIABO","BANANA PRATA"],"cod":"3304144"},{"m":"Paracambi","reg":"CENTRO","lat":-22.6089,"lon":-43.7089,"fat":2044050,"area":107.5,"prod":685,"top":["BANANA PRATA","BANANA NANICA","AIPIM"],"cod":"3303609"},{"m":"Natividade","reg":"NOROESTE","lat":-21.0389,"lon":-41.97,"fat":2014402,"area":111.5,"prod":431,"top":["CAFÉ ARÁBICA","QUIABO","LARANJA"],"cod":"3303104"},{"m":"Resende","reg":"SUL","lat":-22.4686,"lon":-44.4467,"fat":1602931,"area":13.8,"prod":251,"top":["ALFACE - CULT. PROTG","CEBOLINHA","COUVE"],"cod":"3304201"},{"m":"Cardoso Moreira","reg":"NORTE","lat":-21.4842,"lon":-41.6156,"fat":1426441,"area":109.1,"prod":3569,"top":["MILHO FORRAGEIRO","ABOBORA","CANA DE AÇUCAR"],"cod":"3301157"},{"m":"Quatis","reg":"SUL","lat":-22.4058,"lon":-44.2597,"fat":1186120,"area":28.0,"prod":313,"top":["BANANA PRATA","TOMATE","AIPIM"],"cod":"3304128"},{"m":"Areal","reg":"SUL","lat":-22.2286,"lon":-43.1067,"fat":1152167,"area":30.0,"prod":193,"top":["UVA","AIPIM","BANANA NANICA"],"cod":"3300225"},{"m":"Rio das Ostras","reg":"NORTE","lat":-22.5267,"lon":-41.945,"fat":1054316,"area":46.8,"prod":617,"top":["BANANA PRATA","MILHO FORRAGEIRO","AIPIM"],"cod":"3304524"},{"m":"Carapebus","reg":"NORTE","lat":-22.1869,"lon":-41.6631,"fat":999000,"area":67.0,"prod":1596,"top":["ABOBORA","CANA DE AÇUCAR","AIPIM"],"cod":"3300936"},{"m":"Cantagalo","reg":"SERRANA","lat":-21.9808,"lon":-42.3672,"fat":921540,"area":25.5,"prod":219,"top":["ARROZ","QUIABO","JILÓ"],"cod":"3301108"},{"m":"Niterói","reg":"CENTRO","lat":-22.8833,"lon":-43.1036,"fat":875382,"area":20.4,"prod":364,"top":["CANA CALDO","LARANJA","ALFACE"],"cod":"3303302"},{"m":"Porto Real","reg":"SUL","lat":-22.4181,"lon":-44.2925,"fat":801300,"area":42.8,"prod":228,"top":["BANANA PRATA","AIPIM","BANANA NANICA"],"cod":"3304110"},{"m":"Macuco","reg":"SERRANA","lat":-21.9944,"lon":-42.2528,"fat":793800,"area":35.3,"prod":1570,"top":["MILHO FORRAGEIRO","JILÓ","CANA FORRAGEIRA"],"cod":"3302452"},{"m":"Três Rios","reg":"SUL","lat":-22.1167,"lon":-43.2089,"fat":719918,"area":19.5,"prod":179,"top":["AIPIM","ALFACE","UVA"],"cod":"3306000"},{"m":"Mendes","reg":"CENTRO","lat":-22.5264,"lon":-43.7328,"fat":631590,"area":22.4,"prod":154,"top":["BANANA PRATA","BANANA NANICA","AIPIM"],"cod":"3302809"},{"m":"São Pedro da Aldeia","reg":"CENTRO","lat":-22.8394,"lon":-42.1028,"fat":607360,"area":46.1,"prod":250,"top":["COCO VERDE","AIPIM","LARANJA"],"cod":"3305208"},{"m":"Laje do Muriaé","reg":"NOROESTE","lat":-21.2081,"lon":-42.1258,"fat":401052,"area":6.4,"prod":97,"top":["BANANA PRATA","PITAIA","AIPIM"],"cod":"3302304"},{"m":"Armação dos Búzios","reg":"CENTRO","lat":-22.7469,"lon":-41.8817,"fat":311186,"area":11.3,"prod":102,"top":["BANANA PRATA","AIPIM","ABOBORA"],"cod":"3300233"},{"m":"Comendador Levy Gasparian","reg":"SUL","lat":-22.0397,"lon":-43.2136,"fat":301620,"area":9.5,"prod":96,"top":["AIPIM","BANANA NANICA"],"cod":"3300951"},{"m":"Iguaba Grande","reg":"CENTRO","lat":-22.8394,"lon":-42.2286,"fat":72473,"area":13.9,"prod":23,"top":["AIPIM","BANANA PRATA","TANGERINA PONCÃ"],"cod":"3301876"},{"m":"Arraial do Cabo","cod":"3300258","reg":"—","lat":-22.9661,"lon":-42.0278,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true},{"m":"Belford Roxo","cod":"3300456","reg":"—","lat":-22.7642,"lon":-43.3994,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true},{"m":"Itatiaia","cod":"3302254","reg":"—","lat":-22.4964,"lon":-44.5636,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true},{"m":"Mesquita","cod":"3302858","reg":"—","lat":-22.7833,"lon":-43.4297,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true},{"m":"Nilópolis","cod":"3303203","reg":"—","lat":-22.8078,"lon":-43.4136,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true},{"m":"São João de Meriti","cod":"3305109","reg":"—","lat":-22.8036,"lon":-43.3722,"fat":null,"area":null,"prod":null,"top":[],"noaspa":true}],"coffee":[{"m":"Varre-Sai","prod":11000.0,"area":5000.0,"fat":326010000.0,"cod":"3306156"},{"m":"Porciúncula","prod":10150.0,"area":4875.0,"fat":316458800.0,"cod":"3304102"},{"m":"Bom Jardim","prod":1313.35,"area":1151.0,"fat":38030840.0,"cod":"3300506"},{"m":"Bom Jesus do Itabapoana","prod":1234.5,"area":823.0,"fat":36294718.5,"cod":"3300605"},{"m":"São José do Vale do Rio Preto","prod":607.5,"area":270.0,"fat":22828500.0,"cod":"3305158"},{"m":"Duas Barras","prod":515.0,"area":295.0,"fat":19256000.0,"cod":"3301603"},{"m":"Trajano de Moraes","prod":37.1,"area":29.0,"fat":1176100.0,"cod":"3305901"},{"m":"Barra do Piraí","prod":5.13,"area":5.72,"fat":1081200.0,"cod":"3300308"},{"m":"Natividade","prod":30.24,"area":25.2,"fat":791402.4,"cod":"3303104"},{"m":"Petrópolis","prod":12.0,"area":16.0,"fat":720000.0,"cod":"3303906"},{"m":"Valença","prod":7.72,"area":7.6,"fat":656200.0,"cod":"3306100"},{"m":"Rio das Flores","prod":5.76,"area":2.0,"fat":391680.0,"cod":"3304508"},{"m":"Volta Redonda","prod":4.8,"area":4.0,"fat":158400.0,"cod":"3306305"},{"m":"Engenheiro Paulo de Frontin","prod":0.16,"area":0.4,"fat":12800.0,"cod":"3301801"},{"m":"Vassouras","prod":0.03,"area":1.0,"fat":3000.0,"cod":"3306206"}]};
+/* ---------- data ready ---------- */
+const BRL = n => 'R$ ' + (n>=1e9? (n/1e9).toFixed(2)+' bi' : n>=1e6? (n/1e6).toFixed(0)+' mi' : n.toLocaleString('pt-BR'));
+const C = {imperial:'#0a2540',ceu:'#1b6ec2',ouro:'#c9a227',alerta:'#b23a2e',agua:'#2a7d8c',verde:'#3f7d4e',cinza:'#5b6570'};
+Chart.defaults.font.family = "'Helvetica Neue',Arial,sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#5b6570';
+
+/* ---- TSM anomalies (from Painel Nº02, section 1) ---- */
+new Chart(document.getElementById('chartTSM'),{
+  type:'bar',
+  data:{labels:['Niño 4','Niño 3.4','Niño 3','Niño 1+2'],
+    datasets:[{label:'Anomalia de TSM (°C)',data:[null,1.4,1.8,3.0],
+      backgroundColor:['#9db8d4','#4f8fcc','#e07a4f','#b23a2e'],borderRadius:4}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' °C acima da média'}}},
+    scales:{y:{title:{display:true,text:'°C acima da média'},grid:{color:'#eee'}},x:{grid:{display:false}}},
+    responsive:true,maintainAspectRatio:false}
+});
+
+/* ---- Reservatórios prioritários citados (27/07/2026) ---- */
+new Chart(document.getElementById('chartRes'),{
+  type:'bar',
+  data:{labels:['Três Marias\n(São Francisco)','Sobradinho\n(São Francisco)','Serra da Mesa\n(Tocantins)','Tucuruí\n(Tocantins)','Capivara\n(Paranapanema)','Jurumirim\n(Paranapanema)'],
+    datasets:[{label:'Volume útil (%)',data:[92.5,80.8,57.2,86.2,98.5,49.9],
+      backgroundColor:ctx=>{const v=ctx.raw==null?0:ctx.raw;return v>=60?C.agua:v>=40?C.ouro:C.alerta;},borderRadius:4}]},
+  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'% do volume útil'}}},
+    scales:{x:{max:100,title:{display:true,text:'% volume útil (ref. 27/07/2026)'},grid:{color:'#eee'}},y:{grid:{display:false}}},
+    responsive:true,maintainAspectRatio:false}
+});
+
+/* ---- Faturamento por região EMATER ---- */
+(function(){
+  const reg={};
+  DATA.muni.forEach(m=>{reg[m.reg]=(reg[m.reg]||0)+m.fat;});
+  const order=Object.entries(reg).sort((a,b)=>b[1]-a[1]);
+  new Chart(document.getElementById('chartReg'),{
+    type:'bar',
+    data:{labels:order.map(x=>x[0]),
+      datasets:[{label:'Faturamento (R$ mi)',data:order.map(x=>+(x[1]/1e6).toFixed(0)),
+        backgroundColor:[C.imperial,C.ceu,C.agua,C.ouro,C.verde],borderRadius:4}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'R$ '+c.parsed.y+' milhões'}}},
+      scales:{y:{title:{display:true,text:'R$ milhões'},grid:{color:'#eee'}},x:{grid:{display:false}}},
+      responsive:true,maintainAspectRatio:false}
+  });
+})();
+
+/* ---- Café por município ---- */
+(function(){
+  const c=DATA.coffee.slice(0,8);
+  new Chart(document.getElementById('chartCoffee'),{
+    type:'bar',
+    data:{labels:c.map(x=>x.m),
+      datasets:[{label:'Área de café (ha)',data:c.map(x=>Math.round(x.area)),
+        backgroundColor:c.map((x,i)=>i<2?C.alerta:'#c98a6b'),borderRadius:4}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x.toLocaleString('pt-BR')+' ha'}}},
+      scales:{x:{title:{display:true,text:'hectares de café arábica'},grid:{color:'#eee'}},y:{grid:{display:false}}},
+      responsive:true,maintainAspectRatio:false}
+  });
+})();
+
+/* ---------------- LEAFLET MAP ---------------- */
+const map = L.map('map',{scrollWheelZoom:false}).setView([-22.3,-42.6],7.4);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+  attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19,subdomains:'abcd'}).addTo(map);
+
+const REGCOL={CENTRO:'#1b6ec2',NOROESTE:'#b23a2e',NORTE:'#c9a227',SERRANA:'#3f7d4e',SUL:'#2a7d8c'};
+const coffeeSet=new Set(DATA.coffee.map(c=>c.m));
+const withData=DATA.muni.filter(m=>m.fat!=null);
+const maxFat=Math.max(...withData.map(m=>m.fat));
+const NODATA='#b9bec6';   // municípios sem produção consolidada na ASPA
+
+function radius(fat){return 5+Math.sqrt((fat||0)/maxFat)*26;}
+let layer=null, mode='fat';
+
+function color(m){
+  if(m.fat==null) return NODATA;
+  if(mode==='reg') return REGCOL[m.reg]||'#888';
+  if(mode==='coffee') return coffeeSet.has(m.m)?'#b23a2e':'#c8cdd4';
+  // fat gradient
+  const t=m.fat/maxFat;
+  return t>0.6?'#0a2540':t>0.3?'#1b6ec2':t>0.12?'#5a9bd4':'#a9c7e6';
+}
+function popup(m){
+  const coffee=DATA.coffee.find(c=>c.m===m.m);
+  let h=`<b>${m.m}</b> <span class="pop-reg">${m.fat==null?'—':m.reg}</span>`;
+  h+=`<div class="pop-row"><span>Código IBGE</span><span style="font-variant-numeric:tabular-nums">${m.cod}</span></div>`;
+  if(m.fat==null){
+    h+=`<div class="pop-row" style="color:#8b95a0"><span colspan="2">Sem produção agrícola consolidada na ASPA 2025</span></div>`;
+    return h;
+  }
+  h+=`<div class="pop-row"><span>Faturamento</span><b>${BRL(m.fat)}</b></div>`;
+  h+=`<div class="pop-row"><span>Área colhida</span><span>${m.area.toLocaleString('pt-BR')} ha</span></div>`;
+  h+=`<div class="pop-row"><span>Produção</span><span>${m.prod.toLocaleString('pt-BR')} t</span></div>`;
+  if(m.top&&m.top.length) h+=`<div class="pop-row"><span>Principais</span><span>${m.top.slice(0,3).join(', ').toLowerCase()}</span></div>`;
+  if(coffee) h+=`<div class="pop-row" style="color:#b23a2e"><span>☕ Café arábica</span><b>${Math.round(coffee.area).toLocaleString('pt-BR')} ha</b></div>`;
+  return h;
+}
+function draw(){
+  if(layer) map.removeLayer(layer);
+  layer=L.layerGroup();
+  DATA.muni.forEach(m=>{
+    const nd=m.fat==null;
+    const r=nd?5:(mode==='coffee'?(coffeeSet.has(m.m)?radius(m.fat):6):radius(m.fat));
+    L.circleMarker([m.lat,m.lon],{
+      radius:r,fillColor:color(m),color:'#fff',weight:1,
+      fillOpacity:nd?0.5:(mode==='coffee'&&!coffeeSet.has(m.m)?0.35:0.82),
+      dashArray:nd?'2,2':null
+    }).bindPopup(popup(m)).addTo(layer);
+  });
+  layer.addTo(map);
+  legend();
+}
+function legend(){
+  const el=document.getElementById('legend');
+  const nd=`<span><i class="dot" style="background:${NODATA}"></i>Sem dados ASPA (6 munic.)</span>`;
+  if(mode==='reg'){
+    el.innerHTML=Object.entries(REGCOL).map(([k,v])=>`<span><i class="dot" style="background:${v}"></i>${k}</span>`).join('')+nd;
+  }else if(mode==='coffee'){
+    el.innerHTML=`<span><i class="dot" style="background:#b23a2e"></i>Município cafeeiro (exposição alta)</span><span><i class="dot" style="background:#c8cdd4"></i>Sem café arábica registrado</span>`+nd+`<span style="color:#5b6570">Tamanho ∝ faturamento agrícola</span>`;
+  }else{
+    el.innerHTML=`<span><i class="dot" style="background:#0a2540"></i>Muito alto</span><span><i class="dot" style="background:#1b6ec2"></i>Alto</span><span><i class="dot" style="background:#5a9bd4"></i>Médio</span><span><i class="dot" style="background:#a9c7e6"></i>Menor</span>`+nd+`<span style="color:#5b6570">Tamanho ∝ faturamento</span>`;
+  }
+}
+draw();
+document.querySelectorAll('.btn[data-layer]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.btn[data-layer]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); mode=b.dataset.layer; draw();
+  });
+});
+map.on('focus',()=>map.scrollWheelZoom.enable());
+map.on('blur',()=>map.scrollWheelZoom.disable());
+
+/* ---------- NAV scrollspy ---------- */
+const secs=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('nav a')];
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+  }});
+},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
