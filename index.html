@@ -54,6 +54,7 @@
   .brand{ font-size:13px; font-weight:800; letter-spacing:.03em; color:var(--on-navy); white-space:nowrap; }
   .brand b{ color:var(--gold); }
   .tabs{ display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; }
+  .tabs[hidden]{ display:none; }
   .tabs::-webkit-scrollbar{ display:none; }
   .tabs a{
     font-size:13px; font-weight:600; color:var(--on-navy-muted); text-decoration:none;
@@ -330,6 +331,7 @@
     <div class="boletsw" id="boletsw">
       <button type="button" data-set="2">Boletim Nº 02 &middot; Julho</button>
       <button type="button" data-set="3" class="active">Boletim Nº 03 &middot; Agosto</button>
+      <button type="button" data-set="4">CIL &middot; Mortalidade por Calor</button>
     </div>
   </div>
 </nav>
@@ -355,6 +357,17 @@
       <span class="chip">Base agrícola: <b>ASPA 2025</b> &middot; EMATER-RIO</span>
       <span class="chip">Evento: <b>El Niño confirmado</b> (11/06/2026)</span>
       <span class="chip">Projeção OND: <b>81%</b> muito forte (&ge;2,0&deg;C)</span>
+    </div>
+  </div>
+  <div class="inner" data-b="4" hidden>
+    <span class="eyebrow">Climate Impact Lab &middot; University of Chicago / EPIC &middot; Relatório Especial &middot; Setembro/2026</span>
+    <h1>Super El Niño <span class="hl">2026&ndash;2027</span><br>Mortalidade por calor: Brasil e o mundo</h1>
+    <p class="subtitle">Leitura do relatório <i>&ldquo;451,000 at Risk: Where Action Can Save Lives During the Super El Niño&rdquo;</i> (Climate Impact Lab, set/2026), com foco nas projeções de mortes adicionais por calor para o Brasil e comparação com os países mais impactados globalmente.</p>
+    <div class="chip-row">
+      <span class="chip">Fonte: <b>Climate Impact Lab</b> &middot; EPIC, Universidade de Chicago</span>
+      <span class="chip">Autoria: <b>Greenstone, Carleton, Maricle &amp; Grover-Kopec</b></span>
+      <span class="chip">Evento: <b>Super El Niño</b> (jun/2026 &ndash; primavera boreal 2027)</span>
+      <span class="chip">Janela de projeção: <b>set/2026 &ndash; fev/2027</b></span>
     </div>
   </div>
 </header>
@@ -903,6 +916,132 @@
   </section>
   </div>
 
+  <section data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">CIL-1 &middot; Panorama global</span>
+        <h2>451 mil vidas em risco por calor, no mundo</h2>
+        <p class="sub">O Super El Niño iniciado em junho de 2026 está elevando as temperaturas terrestres globais em +1,2&deg;C acima do normal e deve gerar 44% mais dias extremamente quentes do que um ano típico &mdash; um padrão que a Climate Impact Lab descreve como &ldquo;20 anos de aquecimento entregues agora&rdquo;: as condições que o mundo vive nos próximos meses só seriam esperadas, pela trajetória atual de mudança climática, por volta de 2045&ndash;2050.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-tile"><div class="value">451<small> mil</small></div><div class="label">vidas projetadas perdidas por calor na 1ª metade do Super El Niño (a partir de jun/2026), vs. um ano normal</div></div>
+        <div class="stat-tile"><div class="value">239<small> mil</small></div><div class="label">mortes por calor projetadas globalmente só nos próximos 6 meses (set/2026&ndash;fev/2027) &plusmn; 11 mil</div></div>
+        <div class="stat-tile"><div class="value">+1,2<small>&deg;C</small></div><div class="label">anomalia de temperatura terrestre global (population-weighted) projetada para os próximos meses</div></div>
+        <div class="stat-tile"><div class="value">44<small>%</small></div><div class="label">mais dias extremamente quentes do que em um ano normal</div></div>
+      </div>
+      <div class="callout" style="margin-top:16px;">Para dimensionar a escala: as 451 mil mortes projetadas são cerca de <b>65 vezes</b> o número de mortos/desaparecidos na recente enchente repentina no Nepal (6.800 pessoas). O relatório frisa que esses números tendem a <b>subir</b> nas próximas atualizações, já que os efeitos do calor devem persistir até meados de 2027.</div>
+    </div>
+  </section>
+
+  <section class="alt" data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">CIL-2 &middot; Brasil em destaque</span>
+        <h2>Brasil: 13.300 &plusmn; 700 mortes por calor projetadas (set/2026&ndash;fev/2027)</h2>
+        <p class="sub">O Brasil aparece na <b>5ª posição</b> do ranking dos 10 países mais impactados do mundo por mortes adicionais relacionadas ao calor no período, atrás apenas de Nigéria, Indonésia, Sudão e Índia. A maior concentração global está no Sahel (Nigéria, Sudão, Níger e Chade), com 66.800 &plusmn; 2.700 mortes projetadas &mdash; mais de um quarto do total mundial estimado para os 6 meses (239.000 &plusmn; 11.000).</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-tile"><div class="value">13,3<small> mil</small></div><div class="label">mortes adicionais por calor no Brasil, set/2026&ndash;fev/2027, vs. média 1996&ndash;2025 (&plusmn;700)</div></div>
+        <div class="stat-tile"><div class="value">5<small>º</small></div><div class="label">país mais impactado do mundo no ranking de mortes por calor do período</div></div>
+        <div class="stat-tile"><div class="value">8<small> mil</small></div><div class="label">dessas mortes concentradas só entre dezembro/2026 e fevereiro/2027 (60% do total)</div></div>
+        <div class="stat-tile"><div class="value">5,3<small> mil</small></div><div class="label">mortes no trimestre inicial, set&ndash;out&ndash;nov/2026 (por diferença aritmética)</div></div>
+      </div>
+
+      <div class="chart-card" style="margin-top:16px;">
+        <div class="legend">
+          <span class="sw"><span class="dot" style="background:var(--navy-700)"></span>Set&ndash;Out&ndash;Nov/2026</span>
+          <span class="sw"><span class="dot" style="background:var(--gold)"></span>Dez&ndash;Jan&ndash;Fev/2027 (pico)</span>
+        </div>
+        <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Gráfico de barras: mortes adicionais por calor no Brasil, por trimestre, set/2026 a fev/2027">
+          <g class="bar-axis">
+            <line x1="40" y1="20" x2="40" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <line x1="40" y1="210" x2="620" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <text x="34" y="212" text-anchor="end">0</text>
+            <text x="34" y="147" text-anchor="end">3.000</text>
+            <text x="34" y="83" text-anchor="end">6.000</text>
+            <line x1="40" y1="147" x2="620" y2="147" stroke="var(--grid)" stroke-width="1"/>
+            <line x1="40" y1="83" x2="620" y2="83" stroke="var(--grid)" stroke-width="1"/>
+          </g>
+          <g>
+            <rect x="180" y="98" width="90" height="112" rx="6" fill="var(--navy-700)"/>
+            <text class="bar-val" x="225" y="90" text-anchor="middle">5.300</text>
+            <text class="bar-axis" x="225" y="230" text-anchor="middle">Set&ndash;Out&ndash;Nov/2026</text>
+          </g>
+          <g>
+            <rect x="370" y="41" width="90" height="169" rx="6" fill="var(--gold)"/>
+            <text class="bar-val" x="415" y="33" text-anchor="middle">8.000</text>
+            <text class="bar-axis" x="415" y="230" text-anchor="middle" font-weight="800" fill="var(--text-primary)">Dez&ndash;Jan&ndash;Fev/2027</text>
+            <rect x="364" y="14" width="102" height="202" fill="none" stroke="var(--gold-ink)" stroke-width="1.5" stroke-dasharray="3 3" rx="6"/>
+          </g>
+        </svg>
+        <p class="chart-foot">O relatório publica o total do semestre (13.300) e o subtotal do trimestre dez&ndash;fev (8.000); o valor de set&ndash;nov (5.300) é obtido por diferença. O gráfico original (Figura 2) mostra aumento mês a mês, com pico em dezembro e janeiro, mas não publica os valores mensais exatos para o Brasil.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3 style="font-size:15px; margin-bottom:10px;">Ranking dos 10 países mais impactados (mortes adicionais por calor, set/2026&ndash;fev/2027)</h3>
+        <div class="rank-list">
+          <div class="rank-row"><span class="n">1</span><div class="bar-wrap"><div class="city-line"><span class="city">Nigéria</span><span class="region">Sahel</span></div><div class="rank-track"><div class="rank-fill" style="width:100%"></div></div></div><span class="val">31.400</span></div>
+          <div class="rank-row"><span class="n">2</span><div class="bar-wrap"><div class="city-line"><span class="city">Indonésia</span><span class="region">Sudeste Asiático</span></div><div class="rank-track"><div class="rank-fill" style="width:61%"></div></div></div><span class="val">19.300 &plusmn;1.200</span></div>
+          <div class="rank-row"><span class="n">3</span><div class="bar-wrap"><div class="city-line"><span class="city">Sudão</span><span class="region">Sahel</span></div><div class="rank-track"><div class="rank-fill" style="width:56%"></div></div></div><span class="val">17.500</span></div>
+          <div class="rank-row"><span class="n">4</span><div class="bar-wrap"><div class="city-line"><span class="city">Índia</span><span class="region">Sul da Ásia</span></div><div class="rank-track"><div class="rank-fill" style="width:50%"></div></div></div><span class="val">15.800 &plusmn;1.600</span></div>
+          <div class="rank-row" style="background:var(--surface-2); border-radius:8px; padding:4px 8px; margin:0 -8px;"><span class="n">5</span><div class="bar-wrap"><div class="city-line"><span class="city">Brasil <span class="pill critical" style="margin-left:4px;">destaque</span></span><span class="region">América do Sul</span></div><div class="rank-track"><div class="rank-fill" style="width:42%"></div></div></div><span class="val">13.300 &plusmn;700</span></div>
+          <div class="rank-row"><span class="n">6</span><div class="bar-wrap"><div class="city-line"><span class="city">Rep. Dem. do Congo</span><span class="region">África Central</span></div><div class="rank-track"><div class="rank-fill" style="width:32%"></div></div></div><span class="val">10.000 &plusmn;400</span></div>
+          <div class="rank-row"><span class="n">7</span><div class="bar-wrap"><div class="city-line"><span class="city">Níger</span><span class="region">Sahel</span></div><div class="rank-track"><div class="rank-fill" style="width:32%"></div></div></div><span class="val">10.000</span></div>
+          <div class="rank-row"><span class="n">8</span><div class="bar-wrap"><div class="city-line"><span class="city">Chade</span><span class="region">Sahel</span></div><div class="rank-track"><div class="rank-fill" style="width:25%"></div></div></div><span class="val">8.000</span></div>
+          <div class="rank-row"><span class="n">9</span><div class="bar-wrap"><div class="city-line"><span class="city">Filipinas</span><span class="region">dado agregado ao grupo Sudeste Asiático (19.400 &plusmn;1.100)</span></div><div class="rank-track"><div class="rank-fill" style="width:0%"></div></div></div><span class="val">&mdash;</span></div>
+          <div class="rank-row"><span class="n">10</span><div class="bar-wrap"><div class="city-line"><span class="city">Sudão do Sul</span><span class="region">valor individual não publicado no relatório</span></div><div class="rank-track"><div class="rank-fill" style="width:0%"></div></div></div><span class="val">&mdash;</span></div>
+        </div>
+        <p class="small" style="font-size:12px; color:var(--text-muted); margin-top:10px;">Valores &plusmn; representam a margem de erro publicada (média &plusmn;1,96&times; erro-padrão) quando disponível no relatório. Vietnã, Tailândia e Camboja compõem o grupo &ldquo;Sudeste Asiático&rdquo; junto à Filipinas, sem valor individualizado por país.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">CIL-3 &middot; O que pode ser feito</span>
+        <h2>&ldquo;Um cartão-postal do futuro&rdquo;: há tempo para agir</h2>
+        <p class="sub">A Climate Impact Lab descreve as temperaturas anômalas deste El Niño como um &ldquo;cartão-postal do futuro&rdquo;: o que parece extremo agora será a norma em poucas décadas. A diferença é que, diante da mudança climática de longo prazo, ainda há tempo para adaptação reduzir mortes &mdash; e o inventário de adaptação da CIL aponta um conjunto de ações com eficácia comprovada.</p>
+      </div>
+      <div class="reco-grid">
+        <div class="reco-card"><div class="n">1</div><p>Alertas de calor e planos de ação (heat action plans) que permitam à saúde pública antecipar visitas domiciliares a populações vulneráveis.</p></div>
+        <div class="reco-card"><div class="n">2</div><p>Ampliar centros de acolhimento climatizados e pontos de hidratação em áreas de maior exposição e vulnerabilidade social.</p></div>
+        <div class="reco-card"><div class="n">3</div><p>Proteções para trabalhadores expostos ao calor (obras, agricultura, entregas), incluindo pausas obrigatórias e acesso à água.</p></div>
+        <div class="reco-card"><div class="n">4</div><p>Expandir a capacidade do sistema de saúde para monitorar sintomas relacionados ao calor durante a janela de pico (dez/2026&ndash;fev/2027).</p></div>
+        <div class="reco-card"><div class="n">5</div><p>Financiamento antecipatório (anticipatory financing) para direcionar recursos de emergência antes do pico de mortalidade, não depois.</p></div>
+        <div class="reco-card"><div class="n">6</div><p>Previsão de temperatura mais precisa e monitoramento contínuo, integrados aos sistemas de alerta já operados pela Defesa Civil.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">CIL-4 &middot; Metodologia &amp; fontes</span>
+        <h2>Como a Climate Impact Lab calcula essas projeções</h2>
+      </div>
+      <div class="panel">
+        <p>A Climate Impact Lab aplica relações empíricas entre temperatura e mortalidade em excesso &mdash; que consideram diferenças de clima local, vulnerabilidade e capacidade adaptativa &mdash; a <strong>24.378 regiões</strong> em todo o mundo. Essas relações são combinadas com as anomalias de temperatura de longo prazo previstas pelo modelo sazonal <strong>ECMWF SEAS5</strong> (ensemble de 51 membros), resultando em projeções de mudança na mortalidade por excesso de calor em relação à média 1996&ndash;2025.</p>
+        <p>A incerteza das projeções &mdash; tanto da previsão sazonal quanto da própria relação temperatura&ndash;mortalidade &mdash; é propagada ao longo da análise; os intervalos publicados no relatório (&plusmn;) representam a média &plusmn;1,96&times; erro-padrão. Os detalhes completos do método serão publicados em periódico revisado por pares.</p>
+      </div>
+      <div class="link-grid" style="margin:16px 0;">
+        <a class="link-card" href="https://impactlab.org" target="_blank" rel="noopener"><span class="name">Climate Impact Lab</span><span class="desc">Pesquisa que fundamenta as projeções de mortalidade por temperatura</span></a>
+        <a class="link-card" href="https://impactlab.org" target="_blank" rel="noopener"><span class="name">CIL Adaptation Inventory</span><span class="desc">Base de evidências sobre adaptações que reduzem mortes por calor</span></a>
+        <a class="link-card" href="https://epic.uchicago.edu" target="_blank" rel="noopener"><span class="name">EPIC &ndash; Energy Policy Institute</span><span class="desc">Universidade de Chicago &middot; instituição responsável pelo relatório</span></a>
+        <a class="link-card" href="https://mapas.inmet.gov.br/" target="_blank" rel="noopener"><span class="name">Mapa de Estações &ndash; INMET</span><span class="desc">Temp. máxima, umidade mínima e demais parâmetros diários por estação (acompanhamento em tempo real)</span></a>
+      </div>
+      <ul class="sources-list">
+        <li>Greenstone, M.; Carleton, T.; Maricle, G.; Grover-Kopec, E. &ldquo;451,000 at Risk: Where Action Can Save Lives During the Super El Niño.&rdquo; Climate Impact Lab, set/2026.</li>
+        <li>ECMWF SEAS5 &mdash; Copernicus Climate Change Service (C3S), Climate Data Store, previsão sazonal (ensemble de 51 membros)</li>
+        <li>ERA5 &mdash; Copernicus Climate Change Service (C3S), dados históricos de temperatura</li>
+        <li>IPCC AR6 (CMIP6 SSP3-7.0) &mdash; projeção climática de longo prazo via C3S Climate Data Store</li>
+        <li><a href="https://mapas.inmet.gov.br/" target="_blank" rel="noopener">Mapa de Estações &ndash; INMET (temp. máxima, umidade mínima e demais parâmetros diários por estação)</a></li>
+      </ul>
+      <div class="callout" style="margin-top:20px;"><b>Nota de proveniência:</b> todos os números desta aba vêm do relatório da Climate Impact Lab (set/2026), uma modelagem acadêmica internacional independente &mdash; não uma estatística oficial do governo brasileiro. Para uso em decisões formais, recomenda-se cruzar com dados de mortalidade do Ministério da Saúde/DATASUS e Fiocruz quando disponíveis para o mesmo período.</div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -915,6 +1054,11 @@
     <p><b>Fonte-base:</b> Boletim Mensal nº 2 (julho/2026), Painel El Niño 2026-2027, INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM &mdash; complementado com ASPA 2025 (EMATER-RIO) e com o Mapa de Estações do INMET para acompanhamento diário de temperatura e umidade.</p>
     <p>Documento analítico de apoio à decisão; não substitui os boletins e alertas oficiais dos órgãos citados.</p>
     <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível na versão <b>Nº 03 &middot; Agosto/2026</b> &mdash; alterne no topo da página.</p>
+  </div>
+  <div class="inner" data-b="4" hidden>
+    <p><b>Fonte-base:</b> Climate Impact Lab &mdash; &ldquo;451,000 at Risk: Where Action Can Save Lives During the Super El Niño&rdquo; (setembro/2026), Greenstone, Carleton, Maricle &amp; Grover-Kopec, EPIC/Universidade de Chicago.</p>
+    <p>Modelagem acadêmica internacional independente; não é uma estatística oficial do governo brasileiro. Recomenda-se cruzar com dados de mortalidade do Ministério da Saúde/DATASUS e Fiocruz antes de uso em decisões formais.</p>
+    <p style="margin-top:8px; opacity:.8;">Este painel complementa os Boletins INMET <b>Nº 02 &middot; Julho/2026</b> e <b>Nº 03 &middot; Agosto/2026</b> &mdash; alterne no topo da página.</p>
   </div>
 </footer>
 
@@ -1178,6 +1322,9 @@ const RJ_MUN=[{i:'3303401',n:'Nova Friburgo',r:'serrana2',fat:461910450,area:444
         document.querySelectorAll('#boletsw button[data-set]').forEach(function(b){ b.classList.toggle('active', b === btn); });
         document.querySelectorAll('[data-b="2"]').forEach(function(el){ el.hidden = (set !== '2'); });
         document.querySelectorAll('[data-b="3"]').forEach(function(el){ el.hidden = (set !== '3'); });
+        document.querySelectorAll('[data-b="4"]').forEach(function(el){ el.hidden = (set !== '4'); });
+        var tabsNav = document.getElementById('tabs');
+        if(tabsNav){ tabsNav.hidden = (set === '4'); }
       });
     });
   }catch(e){ console.error('boletim switch failed', e); }
