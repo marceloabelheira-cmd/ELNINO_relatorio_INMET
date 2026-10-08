@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>El Niño no Rio de Janeiro</title>
-
 <style>
   :root{
     --navy-950:#0a1424; --navy-900:#0f1e38; --navy-800:#172c4f; --navy-700:#20396a;
@@ -311,10 +313,11 @@
   }
 
 </style>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap">
 </head>
 <body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap">
 
 <nav class="topnav" id="topnav">
   <div class="inner">
@@ -331,7 +334,8 @@
     <div class="boletsw" id="boletsw">
       <button type="button" data-set="2">Boletim Nº 02 &middot; Julho</button>
       <button type="button" data-set="3" class="active">Boletim Nº 03 &middot; Agosto</button>
-      <button type="button" data-set="4">CIL &middot; Mortalidade por Calor</button>
+      <button type="button" data-set="4">Boletim Nº 04 &middot; Setembro</button>
+      <button type="button" data-set="5">CIL &middot; Mortalidade por Calor</button>
     </div>
   </div>
 </nav>
@@ -360,6 +364,17 @@
     </div>
   </div>
   <div class="inner" data-b="4" hidden>
+    <span class="eyebrow">Governo do Estado do Rio de Janeiro &middot; Defesa Civil &middot; Boletim Analítico</span>
+    <h1>El Niño <span class="hl">2026&ndash;2027</span><br>Recorte Sudeste &amp; Rio de Janeiro</h1>
+    <p class="subtitle">Leitura estadual do Painel El Niño 2026-2027 (Boletim Nº 04 &middot; Setembro/2026), cruzada com dados agropecuários oficiais da ASPA 2025 (EMATER-RIO) para dimensionar exposição hídrica, risco de fogo e vulnerabilidade agrícola nos 92 municípios fluminenses.</p>
+    <div class="chip-row">
+      <span class="chip">Fonte primária: <b>Painel El Niño Nº 04</b> &middot; INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM</span>
+      <span class="chip">Base agrícola: <b>ASPA 2025</b> &middot; EMATER-RIO</span>
+      <span class="chip">Evento: <b>El Niño muito forte</b> &mdash; &gt;95% prob. (OND 2026)</span>
+      <span class="chip">Projeção CPC/NOAA: pode ser o <b>mais forte desde 1950</b> (TSM &gt;2,5&deg;C)</span>
+    </div>
+  </div>
+  <div class="inner" data-b="5" hidden>
     <span class="eyebrow">Climate Impact Lab &middot; University of Chicago / EPIC &middot; Relatório Especial &middot; Setembro/2026</span>
     <h1>El Niño <span class="hl">2026&ndash;2027</span><br>Mortalidade por calor: Brasil e o mundo</h1>
     <p class="subtitle">Leitura do relatório <i>&ldquo;451,000 at Risk: Where Action Can Save Lives During the Super El Niño&rdquo;</i> (Climate Impact Lab, set/2026), com foco nas projeções de mortes adicionais por calor para o Brasil e comparação com os países mais impactados globalmente.</p>
@@ -429,6 +444,43 @@
       </div>
       <div class="callout" style="margin-top:16px;">
         O Painel não traz uma seção dedicada ao Rio de Janeiro, mas cita o estado três vezes de forma operacionalmente relevante: (1) a <b>Reserva Biológica União (RJ)</b> mantém condição de <b>seca severa</b> no Índice Integrado de Seca; (2) a bacia do <b>Paraíba do Sul</b> tem reunião de crise agendada &mdash; a 113ª do GAOPS, em 11/08/2026; e (3) o Sudeste inteiro entra no grupo de &ldquo;chuvas abaixo da média + temperaturas acima da média&rdquo; para o trimestre ASO.
+      </div>
+    </div>
+  </section>
+
+  <section data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">1 &middot; Panorama executivo</span>
+        <h2>O que o Boletim Nº 04 muda em relação aos anteriores</h2>
+        <p class="sub">O quarto boletim do Painel El Niño (setembro/2026) eleva a confiança no evento &mdash; agora com mais de 95% de probabilidade de um El Niño muito forte no trimestre OND, ante 81% (Nº02) e &gt;90% (Nº03) &mdash; e traz uma mudança relevante para o Rio: pela primeira vez, parte do Sudeste, incluindo o estado, entra na faixa de <strong>chuva acima da média</strong> prevista para outubro-dezembro, revertendo o sinal mais seco dos boletins anteriores.</p>
+      </div>
+      <div class="axis-grid">
+        <div class="axis-card">
+          <div class="top"><span class="icon">💧</span><span class="pill warning">Atenção, sem dado estadual</span></div>
+          <h3>Hídrico &amp; abastecimento</h3>
+          <p class="note">SIN em 65,9% do volume útil (23/09) &mdash; 2º maior valor para a data desde 2015. O boletim não publica percentual do Paraíba do Sul/Guandu neste mês.</p>
+        </div>
+        <div class="axis-card">
+          <div class="top"><span class="icon">🌡️</span><span class="pill critical">Crítico, em alta</span></div>
+          <h3>Força do El Niño</h3>
+          <p class="note">&gt;95% de probabilidade de evento muito forte na OND 2026; pode ser o mais forte desde 1950, com TSM podendo superar +2,5&deg;C.</p>
+        </div>
+        <div class="axis-card">
+          <div class="top"><span class="icon">🔥</span><span class="pill good">Nacionalmente ameno no Sul/Sudeste</span></div>
+          <h3>Incêndios florestais</h3>
+          <p class="note">Risco de fogo da Cemaden para OND concentra-se no centro-norte (395 municípios em Alerta Alto); Sul com condições &ldquo;predominantemente menos críticas&rdquo;.</p>
+        </div>
+        <div class="axis-card">
+          <div class="top"><span class="icon">🌦️</span><span class="pill good">Reversão favorável</span></div>
+          <h3>Chuva na OND 2026</h3>
+          <p class="note">RJ, SP e centro-sul de MG entram na faixa de chuva acima da média &mdash; ao contrário do sinal mais seco indicado pelos Boletins Nº02/Nº03.</p>
+        </div>
+        <div class="axis-card">
+          <div class="top"><span class="icon">🌾</span><span class="pill good">Outlook melhora</span></div>
+          <h3>Agropecuária fluminense</h3>
+          <p class="note">Chuva acima da média deve favorecer o pegamento dos frutos do café e a semeadura de soja/milho de 1ª safra. Base ASPA 2025 segue em R$ 4,58 bi.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -532,6 +584,53 @@
       </div>
     </div>
   </section>
+
+  <section class="alt" data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">2 &middot; Clima sazonal</span>
+        <h2>OND 2026: mais confiança no evento, sinal de chuva mais favorável ao RJ</h2>
+      </div>
+      <div class="panel">
+        <p>O El Niño foi confirmado pela NOAA em 11 de junho de 2026. O boletim de setembro aponta <strong>probabilidade superior a 95%</strong> de o evento atingir a categoria muito forte no trimestre outubro-novembro-dezembro (OND) &mdash; e sinaliza a possibilidade de ser <strong>o El Niño mais forte desde 1950</strong>, com temperatura do Pacífico podendo superar <strong>+2,5&deg;C</strong> acima da média histórica.</p>
+        <p>Para precipitação, a previsão multimodelo (CPTEC/INPE, INMET, FUNCEME) aponta maior probabilidade de chuva <strong>acima da faixa normal no Sul, em parte do Sudeste e no leste do Nordeste</strong> &mdash; e, pela primeira vez nas três edições deste painel, <strong>o Rio de Janeiro é citado nominalmente</strong> entre os estados com esse sinal mais úmido, junto a São Paulo e ao centro-sul de Minas Gerais. Já a temperatura segue com probabilidade elevada de ficar acima da média em praticamente todo o país, inclusive no RJ.</p>
+        <div class="callout">O próprio Painel pondera: a tendência de chuva abaixo da média em outras regiões, combinada a temperaturas acima da média, <b>aumenta o potencial de queimadas</b> &mdash; o alívio hídrico projetado para o RJ não elimina o risco de calor extremo no estado.</div>
+      </div>
+
+      <div class="chart-card">
+        <div class="legend">
+          <span class="sw"><span class="dot" style="background:var(--gold)"></span>Probabilidade de El Niño &ldquo;muito forte&rdquo; no trimestre-alvo, por edição</span>
+        </div>
+        <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Gráfico de barras: probabilidade de El Niño muito forte, por edição do Painel">
+          <g class="bar-axis">
+            <line x1="40" y1="20" x2="40" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <line x1="40" y1="210" x2="620" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <text x="34" y="212" text-anchor="end">0%</text>
+            <text x="34" y="115" text-anchor="end">50%</text>
+            <text x="34" y="26" text-anchor="end">100%</text>
+            <line x1="40" y1="115" x2="620" y2="115" stroke="var(--grid)" stroke-width="1"/>
+          </g>
+          <g>
+            <rect x="120" y="56" width="90" height="154" rx="6" fill="var(--navy-700)"/>
+            <text class="bar-val" x="165" y="48" text-anchor="middle">81%</text>
+            <text class="bar-axis" x="165" y="230" text-anchor="middle">Nº02 &middot; jul &middot; OND</text>
+          </g>
+          <g>
+            <rect x="285" y="40" width="90" height="170" rx="6" fill="var(--navy-700)"/>
+            <text class="bar-val" x="330" y="32" text-anchor="middle">&gt;90%</text>
+            <text class="bar-axis" x="330" y="230" text-anchor="middle">Nº03 &middot; ago &middot; SON</text>
+          </g>
+          <g>
+            <rect x="450" y="21" width="90" height="189" rx="6" fill="var(--gold)"/>
+            <text class="bar-val" x="495" y="13" text-anchor="middle">&gt;95%</text>
+            <text class="bar-axis" x="495" y="230" text-anchor="middle" font-weight="800" fill="var(--text-primary)">Nº04 &middot; set &middot; OND</text>
+            <rect x="444" y="14" width="102" height="202" fill="none" stroke="var(--gold-ink)" stroke-width="1.5" stroke-dasharray="3 3" rx="6"/>
+          </g>
+        </svg>
+        <p class="chart-foot">Probabilidade de El Niño &ldquo;muito forte&rdquo; (CPC/NOAA) para o trimestre de maior confiança de cada edição do Painel. Nº02 e Nº04 referem-se ao trimestre OND; Nº03, ao trimestre SON &mdash; a tendência de alta é consistente mesmo com a pequena diferença de janela.</p>
+      </div>
+    </div>
+  </section>
   </div>
 
   <div id="hidrico">
@@ -590,6 +689,68 @@
       </div>
     </div>
   </section>
+
+  <section data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">3 &middot; Recursos hídricos</span>
+        <h2>Reservatórios do SIN no 2º melhor patamar para a data desde 2015</h2>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <p>Em 23/09/2026, o volume equivalente dos reservatórios do Sistema Interligado Nacional (SIN) atingiu <strong>65,9%</strong> do volume útil &mdash; o segundo maior valor para a data desde 2015, atrás apenas de 2023. Na Região Sul, os reservatórios de regularização do SIN armazenavam <strong>81,4%</strong> do volume útil, refletindo os acumulados expressivos de chuva na região.</p>
+          <p>No Paranapanema, afluências três vezes superiores à vazão média de longo termo em setembro elevaram os armazenamentos de Capivara (90,3%), Chavantes (81,4%) e Jurumirim (73,2%). No rio São Francisco, Três Marias (80,5%) e Sobradinho (66,6%) operam na Faixa de Operação Normal. O Nordeste, por outro lado, recuou de 50% (agosto) para <strong>47,2%</strong> (24/09) no reservatório equivalente regional, com 96 açudes abaixo de 20% do volume monitorados pela ANA. O Sistema Cantareira (SP) está em 41,3% e passará a operar em Faixa de Atenção a partir de outubro.</p>
+          <div class="callout"><b>Nota de proveniência (Boletim Nº04):</b> assim como no Nº02, este boletim não publica percentual específico para o sistema Paraíba do Sul/Guandu, que abastece cerca de 80% da Região Metropolitana do Rio. Os valores acima são os reservatórios de referência nacional citados no documento &mdash; recomenda-se complementar com o monitoramento direto do INEA/ANA para a bacia do Paraíba do Sul.</div>
+        </div>
+        <div class="stat-grid" style="grid-template-columns:1fr;">
+          <div class="stat-tile"><div class="value">65,9<small>%</small></div><div class="label">Volume equivalente do SIN (23/09/2026)</div><div class="delta up">2º maior valor para a data desde 2015</div></div>
+          <div class="stat-tile"><div class="value">84<small>%</small></div><div class="label">do Sudeste sob seca fraca/moderada em ago/2026</div><div class="delta down">&uarr; de 76% em jun/2026 (Boletim Nº02)</div></div>
+          <div class="stat-tile"><div class="value">47,2<small>%</small></div><div class="label">reservatório equivalente do Nordeste (24/09)</div><div class="delta down">&darr; de 50% em agosto/2026</div></div>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top:16px;">
+        <div class="legend"><span class="sw"><span class="dot" style="background:var(--navy-700)"></span>Volume equivalente do SIN em 23/09, por ano</span></div>
+        <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Gráfico de barras: volume equivalente do SIN em 23 de setembro, 2022 a 2026">
+          <g class="bar-axis">
+            <line x1="40" y1="20" x2="40" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <line x1="40" y1="210" x2="620" y2="210" stroke="var(--baseline)" stroke-width="1"/>
+            <text x="34" y="212" text-anchor="end">0%</text>
+            <text x="34" y="115" text-anchor="end">50%</text>
+            <text x="34" y="26" text-anchor="end">100%</text>
+            <line x1="40" y1="115" x2="620" y2="115" stroke="var(--grid)" stroke-width="1"/>
+          </g>
+          <g>
+            <rect x="76" y="92" width="68" height="118" rx="5" fill="var(--navy-700)"/>
+            <text class="bar-val" x="110" y="84" text-anchor="middle">62,07%</text>
+            <text class="bar-axis" x="110" y="230" text-anchor="middle">23/09/2022</text>
+          </g>
+          <g>
+            <rect x="196" y="60" width="68" height="150" rx="5" fill="var(--navy-700)"/>
+            <text class="bar-val" x="230" y="52" text-anchor="middle">74,07%</text>
+            <text class="bar-axis" x="230" y="230" text-anchor="middle">23/09/2023</text>
+          </g>
+          <g>
+            <rect x="316" y="104" width="68" height="106" rx="5" fill="var(--navy-700)"/>
+            <text class="bar-val" x="350" y="96" text-anchor="middle">55,99%</text>
+            <text class="bar-axis" x="350" y="230" text-anchor="middle">23/09/2024</text>
+          </g>
+          <g>
+            <rect x="436" y="91" width="68" height="119" rx="5" fill="var(--navy-700)"/>
+            <text class="bar-val" x="470" y="83" text-anchor="middle">62,38%</text>
+            <text class="bar-axis" x="470" y="230" text-anchor="middle">23/09/2025</text>
+          </g>
+          <g>
+            <rect x="556" y="86" width="68" height="124" rx="5" fill="var(--gold)"/>
+            <text class="bar-val" x="590" y="78" text-anchor="middle">65,89%</text>
+            <text class="bar-axis" x="590" y="230" text-anchor="middle" font-weight="800" fill="var(--text-primary)">23/09/2026</text>
+            <rect x="550" y="14" width="80" height="202" fill="none" stroke="var(--gold-ink)" stroke-width="1.5" stroke-dasharray="3 3" rx="6"/>
+          </g>
+        </svg>
+        <p class="chart-foot">Volume equivalente do SIN (%) em 23 de setembro, 2022&ndash;2026. Fonte: Sistema de Acompanhamento de Reservatórios (SAR)/ANA, Figura 6 do Boletim Nº04.</p>
+      </div>
+    </div>
+  </section>
   </div>
 
   <div id="fogo">
@@ -617,6 +778,20 @@
         <p>Para o trimestre agosto-outubro, o Painel registra <strong>expansão das áreas em condição de &ldquo;Alerta&rdquo; sobre o Sudeste</strong>, com destaque para Minas Gerais, refletindo a consolidação da estação seca combinada a temperaturas acima da média. A previsão de fogo do INPE-INMET-FUNCEME parte de chuva abaixo da média em quase todo o Brasil (exceto Sul).</p>
         <p>O documento pondera que outros modelos internacionais apontam cenário menos pessimista para Sudeste e Centro-Oeste (chuva acima da média), o que tornaria o risco de fogo menos crítico. Para a Defesa Civil fluminense, a leitura prudente é preparar-se para o cenário mais severo enquanto se acompanha a evolução mensal.</p>
         <div class="callout">O período de maior atenção para incêndios florestais no Rio de Janeiro é <b>agosto a novembro</b>, coincidindo com a estação seca e o pico da demanda evaporativa projetada. As áreas de vegetação nativa serrana e as porções Norte/Noroeste &mdash; mais quentes e secas no cenário ASO &mdash; concentram o risco.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">4 &middot; Risco de fogo</span>
+        <h2>Foco nacional no centro-norte; Sul e Sudeste em condição mais branda</h2>
+      </div>
+      <div class="panel">
+        <p>Os eventos de fogo no país ficaram cerca de 44% (julho) e 37% (agosto) abaixo das médias mensais de 2020-2025, mas a atividade se intensificou rapidamente a partir de então: <strong>+146%</strong> entre julho e agosto, com continuidade do crescimento em setembro (<strong>+66%</strong> sobre agosto). O destaque do boletim é o Amapá, onde a atividade de fogo antecipa sua sazonalidade habitual.</p>
+        <p>Para o trimestre outubro-dezembro, o modelo de risco de fogo do Cemaden classifica <strong>395 municípios em Alerta Alto</strong> e <strong>533 em Alerta</strong> (juntos, cerca de 4,76 milhões de km²), além de 2.135 municípios em Atenção (2,33 milhões de km²). Os níveis mais elevados permanecem concentrados no <strong>centro-norte do país</strong>, enquanto o <strong>Sul apresenta condições predominantemente menos críticas</strong> &mdash; um padrão espacial consistente com o sinal de chuva acima da média projetado para parte do Sudeste.</p>
+        <div class="callout">O Boletim Nº04 <b>não cita o Rio de Janeiro nominalmente</b> nesta seção &mdash; diferente dos Boletins Nº02/Nº03, que registravam alerta estadual de risco muito alto e mais de 1.000 ocorrências de incêndio em vegetação desde agosto. Isso não substitui o monitoramento estadual: o INEA e o Corpo de Bombeiros devem seguir acompanhando a evolução local, já que o alívio no sinal nacional reflete o cenário hídrico mais favorável, não a ausência de risco de calor.</div>
       </div>
     </div>
   </section>
@@ -722,6 +897,40 @@
       <p class="small" style="font-size:12.5px; color:var(--text-muted); margin-top:10px;">A coluna &ldquo;Exposição no RJ&rdquo; cruza o sinal do Painel Nº02 com a distribuição geográfica das culturas na base ASPA 2025 &mdash; leitura analítica, não uma projeção quantitativa de perda.</p>
     </div>
   </section>
+
+  <section data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">5 &middot; Agropecuária</span>
+        <h2>Primeira leitura agrometeorológica favorável ao RJ nas três edições</h2>
+        <p class="sub">Previsão INMET/INPE/CPTEC/FUNCEME para o trimestre OND 2026 &mdash; cruzada com a base ASPA 2025 (EMATER-RIO), mantida como base agrícola única deste painel.</p>
+      </div>
+      <div class="panel">
+        <p>Pela primeira vez nas três edições cobertas por este painel, a previsão agrometeorológica cita o Rio de Janeiro entre os estados beneficiados: <strong>&ldquo;As chuvas acima da média previstas para São Paulo, Rio de Janeiro e centro-sul de Minas Gerais deverão favorecer a semeadura e o estabelecimento inicial das lavouras de soja e milho de primeira safra, o pegamento dos frutos do café e a brotação da cana-de-açúcar.&rdquo;</strong></p>
+        <p>A ressalva fica por conta das áreas vizinhas: em Minas Gerais e no norte do Espírito Santo, temperaturas elevadas e restrição hídrica persistente podem prejudicar a florada do café arábica e o desenvolvimento do conilon &mdash; um risco que não se estende ao território fluminense nesta previsão, mas que reforça a necessidade de acompanhar a fronteira Noroeste Fluminense/Sul de Minas. Em áreas com excesso de chuva, o boletim também aponta risco de interrupções pontuais na colheita da cana-de-açúcar.</p>
+        <div class="callout">Ainda assim, a cafeicultura arábica do estado segue concentrada no Noroeste Fluminense (79% da área em Varre-Sai e Porciúncula, base ASPA 2025) &mdash; região historicamente mais quente e seca do RJ. Um trimestre mais chuvoso tende a aliviar o estresse hídrico, mas não elimina a exposição ao calor extremo que caracteriza esse polo cafeeiro.</div>
+      </div>
+      <div class="stat-grid" style="margin-top:16px;">
+        <div class="stat-tile"><div class="value">R$ 4,58<small> bi</small></div><div class="label">Faturamento bruto agrícola do RJ (ASPA 2025, base mantida)</div></div>
+        <div class="stat-tile"><div class="value">12.505<small> ha</small></div><div class="label">Área de café arábica no estado (2.986 produtores, R$ 764 mi)</div></div>
+        <div class="stat-tile"><div class="value">79<small>%</small></div><div class="label">Do café arábica está em Varre-Sai + Porciúncula (Noroeste)</div></div>
+        <div class="stat-tile"><div class="value">144,7<small> mil ha</small></div><div class="label">Área colhida total do estado, todas as culturas (ASPA 2025)</div></div>
+      </div>
+      <div class="matrix-scroll" style="margin-top:20px;">
+        <table class="matrix">
+          <thead><tr><th>Cultura / grupo</th><th>Sinal do Painel Nº04 (OND 2026)</th><th>Exposição no RJ</th></tr></thead>
+          <tbody>
+            <tr><th>Soja e milho (1ª safra)</th><td>Chuva acima da média favorece semeadura e estabelecimento inicial</td><td><span class="cell good">Favorável</span> Centro, Norte, Noroeste</td></tr>
+            <tr><th>Café arábica</th><td>Chuva acima da média favorece o pegamento dos frutos (RJ não citado nos riscos de MG/ES)</td><td><span class="cell good">Favorável</span> Noroeste (Varre-Sai, Porciúncula)</td></tr>
+            <tr><th>Cana-de-açúcar</th><td>Brotação favorecida; risco pontual de interrupção da colheita em áreas de excesso de chuva</td><td><span class="cell warning">Mista</span> Norte (Campos, S. F. Itabapoana)</td></tr>
+            <tr><th>Olerícolas (folhas/frutos)</th><td>Sem sinal de estresse hídrico adicional nesta edição</td><td><span class="cell good">Favorável</span> Serrana (Nova Friburgo, Teresópolis)</td></tr>
+            <tr><th>Pastagens</th><td>Chuva acima da média tende a aliviar a disponibilidade de forragem</td><td><span class="cell good">Favorável</span> Norte e Noroeste</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="font-size:12.5px; color:var(--text-muted); margin-top:10px;">A coluna &ldquo;Exposição no RJ&rdquo; cruza o sinal do Painel Nº04 com a distribuição geográfica das culturas na base ASPA 2025 &mdash; leitura analítica, não uma projeção quantitativa de safra.</p>
+    </div>
+  </section>
   </div>
 
   <div id="webmap">
@@ -784,6 +993,34 @@
         </div>
       </div>
       <p class="sub" style="margin-top:12px;">Contornos municipais: malha IBGE redistribuída via geodata-br, casada por código IBGE com a planilha ASPA 2025. Coordenadas de referência: sedes municipais.</p>
+    </div>
+  </section>
+
+  <section data-b="4" hidden id="webmapB4">
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">6 &middot; Webmap municipal</span>
+        <h2>Os 92 municípios do Rio, por exposição</h2>
+        <p class="sub">Mesmo mapa-base dos demais boletins (contornos reais, projeção equiretangular, dado individualizado para <strong>86 municípios</strong> na base ASPA 2025/EMATER-RIO) &mdash; aqui como referência territorial para o cenário mais favorável de chuva indicado pelo Boletim Nº04. Alterne as camadas abaixo; clique em um município para ver o detalhe.</p>
+      </div>
+      <div class="maptabs" role="tablist">
+        <button class="maptab active" data-layer="fat" type="button">Faturamento agrícola</button>
+        <button class="maptab" data-layer="redec" type="button">Região (REDEC)</button>
+        <button class="maptab" data-layer="cafe" type="button">Exposição cafeeira</button>
+      </div>
+      <div class="mapwrap">
+        <div class="mapsvg-card">
+          <svg id="rjMap3" viewBox="0 0 780 620" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa dos municípios do Rio de Janeiro &mdash; Boletim Nº04"></svg>
+          <div class="map-tooltip" id="mapTooltip3"></div>
+        </div>
+        <div class="map-side">
+          <div class="map-legend" id="mapLegend3"></div>
+          <div class="map-detail" id="mapDetail3">
+            <div class="d-empty">Passe o mouse ou clique em um município do mapa para ver Código IBGE, região REDEC, exposição cafeeira e faturamento agrícola (quando disponível).</div>
+          </div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:12px;">Contornos municipais: malha IBGE redistribuída via geodata-br, casada por código IBGE com a planilha ASPA 2025 (EMATER-RIO). Regionalização: 11 REDECs da Defesa Civil do RJ. Dados idênticos aos do Boletim Nº03, mantidos como base agrícola única do painel.</p>
     </div>
   </section>
   </div>
@@ -914,9 +1151,72 @@
       <div class="callout" style="margin-top:20px;"><b>Nota de proveniência (Boletim Nº02):</b> os números agrícolas por município (faturamento, área, produção, café) vêm diretamente da planilha ASPA 2025; as afirmações climáticas e projeções sazonais são citações diretas do Painel Nº02. Não há, neste boletim, séries de volume de reservatório do Paraíba do Sul/Funil ao longo do tempo, contagem anual de focos de incêndio no RJ ou projeções quantitativas de perda de safra &mdash; o Painel não publica esses valores para o estado.</div>
     </div>
   </section>
+
+  <section class="alt" data-b="4" hidden>
+    <div class="inner">
+      <div class="section-head">
+        <span class="num">7 &middot; Cenário &amp; ações</span>
+        <h2>Novas ferramentas de monitoramento lançadas neste boletim</h2>
+        <p class="sub">O Boletim Nº04 detalha, pela primeira vez nas três edições, a arquitetura institucional de monitoramento e alerta por trás do Painel &mdash; útil para qualificar a articulação do GIGR-SEIF com os órgãos federais.</p>
+      </div>
+      <div class="panel">
+        <p>O INMET mantém dois canais abertos ao público: <a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">avisos meteorológicos</a> (fenômenos potencialmente perigosos, por nível de severidade) e <a href="https://previsao.inmet.gov.br/" target="_blank" rel="noopener">previsão do tempo</a> por município. O SGB opera o <strong>SACE (Sistema de Alerta de Eventos Críticos)</strong>, reunindo níveis de rios, chuvas e boletins hidrológicos em tempo real para as bacias cobertas pelos Sistemas de Alerta Hidrológico. O Cemaden disponibiliza alertas geo-hidrológicos em tempo real pelo <a href="https://painelalertas.cemaden.gov.br/" target="_blank" rel="noopener">Painel de Alertas</a> e monitora seca nos territórios pela <a href="https://alertasecas.cemaden.gov.br/" target="_blank" rel="noopener">Plataforma Alerta-Secas</a>, incluindo o boletim RiSAF de risco de seca na agricultura familiar.</p>
+        <p>A SEDEC Nacional opera o <strong>Defesa Civil Alerta (DCA)</strong>, serviço gratuito por Cell Broadcast que envia mensagens de emergência a celulares em áreas potencialmente afetadas, e realiza um Briefing Diário reunindo defesas civis estaduais e municipais com as instituições federais parceiras para consolidar o panorama meteorológico, hidrológico, geológico e climático do dia.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3 style="font-size:15px; margin-top:0;">Próximas reuniões das Salas de Avaliação, Acompanhamento e Crise (ANA)</h3>
+        <div class="matrix-scroll">
+          <table class="matrix">
+            <thead><tr><th>Reunião</th><th>Data</th><th>Transmissão</th></tr></thead>
+            <tbody>
+              <tr><th>10ª Sala de Acompanhamento &mdash; Sistema Hídrico do Rio São Francisco</th><td>06/10/2026, 10h</td><td><a href="https://www.youtube.com/live/X9Qo3RorRvk" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>115ª Reunião do GAOPS &mdash; Sistema Hidráulico Paraíba do Sul</th><td>13/10/2026, 15h</td><td><a href="https://www.youtube.com/live/mm_MZasi2hA" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>13ª Avaliação Hidrometeorológica &mdash; Bacia do Alto Paraguai (Pantanal)</th><td>21/10/2026, 15h</td><td><a href="https://www.youtube.com/live/34NK93DQ2KE" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>10ª Sala de Acompanhamento &mdash; Sistema Hídrico do Rio Paranapanema</th><td>22/10/2026, 15h</td><td><a href="https://www.youtube.com/live/-P8781ToU9U" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>4ª Avaliação Hidrometeorológica &mdash; Região Norte</th><td>23/10/2026, 15h</td><td><a href="https://www.youtube.com/live/dhK1DFVyCso" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>9ª Sala de Crise &mdash; Região Sul</th><td>27/10/2026, 10h</td><td><a href="https://www.youtube.com/live/qNKMweMLYys" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>10ª Sala de Acompanhamento &mdash; Sistema Hídrico do Rio Tocantins</th><td>28/10/2026, 10h</td><td><a href="https://www.youtube.com/live/JzYqPehvjQU" target="_blank" rel="noopener">YouTube</a></td></tr>
+              <tr><th>10ª Sala de Acompanhamento &mdash; Região Hidrográfica do Paraná</th><td>29/10/2026, 10h</td><td><a href="https://www.youtube.com/live/g5bWw2rDk8I" target="_blank" rel="noopener">YouTube</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small" style="font-size:12px; color:var(--text-muted); margin-top:8px;">Tabela 1 do Boletim Nº04. Destaque para a <b>115ª reunião do GAOPS</b> (13/10) &mdash; mesma instância de governança da bacia do Paraíba do Sul já citada no Boletim Nº02 (113ª reunião, 11/08/2026), relevante para a Região Metropolitana do Rio.</p>
+      </div>
+
+      <div class="reco-grid" style="margin:24px 0;">
+        <div class="reco-card"><div class="n">1</div><p>Reavaliar o plano de contingência hídrico considerando o sinal de chuva acima da média para OND &mdash; sem relaxar o monitoramento, dado o histórico de reversões rápidas que o próprio Painel já registrou entre edições.</p></div>
+        <div class="reco-card"><div class="n">2</div><p>Acompanhar a 115ª reunião do GAOPS (13/10) sobre o Paraíba do Sul, na sequência da 113ª (ago) já monitorada pelo GIGR-SEIF.</p></div>
+        <div class="reco-card"><div class="n">3</div><p>Integrar o SACE (SGB) e o Painel de Alertas do Cemaden ao acompanhamento contínuo já realizado via CEMADEN-RJ e Alerta Rio.</p></div>
+        <div class="reco-card"><div class="n">4</div><p>Reforçar a adesão da população ao Defesa Civil Alerta (DCA/Cell Broadcast), citado como ferramenta nacional de referência neste boletim.</p></div>
+        <div class="reco-card"><div class="n">5</div><p>Manter o monitoramento de calor extremo mesmo com o sinal de chuva mais favorável &mdash; a previsão de temperatura acima da média para o RJ não muda nesta edição.</p></div>
+        <div class="reco-card"><div class="n">6</div><p>Atualizar a Matriz ICR do El Niño 2026/2027 incorporando a reversão do sinal pluviométrico identificada no Boletim Nº04.</p></div>
+      </div>
+
+      <div class="link-grid" style="margin-bottom:24px;">
+        <a class="link-card" href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener"><span class="name">Avisos Meteorológicos &mdash; INMET</span><span class="desc">Fenômenos potencialmente perigosos, por nível de severidade</span></a>
+        <a class="link-card" href="https://mapas.inmet.gov.br/" target="_blank" rel="noopener"><span class="name">Mapa de Estações &mdash; INMET</span><span class="desc">Temp. máxima, umidade mínima e outros parâmetros diários, por estação (RJ e Sudeste)</span></a>
+        <a class="link-card" href="https://painelalertas.cemaden.gov.br/" target="_blank" rel="noopener"><span class="name">Painel de Alertas &mdash; Cemaden</span><span class="desc">Alertas geo-hidrológicos em tempo real</span></a>
+        <a class="link-card" href="https://alertasecas.cemaden.gov.br/" target="_blank" rel="noopener"><span class="name">Plataforma Alerta-Secas &mdash; Cemaden</span><span class="desc">Monitoramento de seca nos territórios, incl. RiSAF</span></a>
+        <a class="link-card" href="https://monitordesecas.ana.gov.br/" target="_blank" rel="noopener"><span class="name">Monitor de Secas &mdash; ANA/Cemaden</span><span class="desc">Classificação de seca por região (S1&ndash;S4)</span></a>
+        <a class="link-card" href="https://www.defesacivil.rj.gov.br/" target="_blank" rel="noopener"><span class="name">Defesa Civil RJ</span><span class="desc">REDECs, planos de contingência e alertas</span></a>
+      </div>
+
+      <ul class="sources-list">
+        <li>Painel El Niño 2026-2027, Boletim Mensal Nº 04 &mdash; Setembro/2026 (INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM)</li>
+        <li>ASPA 2025 &mdash; Análise de Situação e Perspectivas Agropecuárias, EMATER-RIO (planilha oficial, safra 2025)</li>
+        <li><a href="https://mapas.inmet.gov.br/" target="_blank" rel="noopener">Mapa de Estações &ndash; INMET (temperatura, umidade e demais parâmetros diários por estação)</a></li>
+        <li><a href="https://monitordesecas.ana.gov.br/" target="_blank" rel="noopener">Monitor de Secas &ndash; ANA/Cemaden</a></li>
+        <li><a href="https://painelalertas.cemaden.gov.br/" target="_blank" rel="noopener">Painel de Alertas &ndash; Cemaden</a></li>
+        <li><a href="https://panorama.sipam.gov.br/painel-do-fogo/index.html" target="_blank" rel="noopener">Painel do Fogo &ndash; CENSIPAM</a></li>
+        <li><a href="https://www.ufrgs.br/sardim/" target="_blank" rel="noopener">SARDIM &ndash; previsão hidrológica sazonal (HGE/UFRGS)</a></li>
+        <li><a href="https://www.defesacivil.rj.gov.br/index.php/para-municipios/regionais-de-defesa-civil" target="_blank" rel="noopener">Regionais de Defesa Civil (REDECs)</a></li>
+      </ul>
+    </div>
+  </section>
   </div>
 
-  <section data-b="4" hidden>
+  <section data-b="5" hidden>
     <div class="inner">
       <div class="section-head">
         <span class="num">CIL-1 &middot; Panorama global</span>
@@ -933,7 +1233,7 @@
     </div>
   </section>
 
-  <section class="alt" data-b="4" hidden>
+  <section class="alt" data-b="5" hidden>
     <div class="inner">
       <div class="section-head">
         <span class="num">CIL-2 &middot; Brasil em destaque</span>
@@ -997,7 +1297,7 @@
     </div>
   </section>
 
-  <section data-b="4" hidden>
+  <section data-b="5" hidden>
     <div class="inner">
       <div class="section-head">
         <span class="num">CIL-3 &middot; O que pode ser feito</span>
@@ -1015,7 +1315,7 @@
     </div>
   </section>
 
-  <section class="alt" data-b="4" hidden>
+  <section class="alt" data-b="5" hidden>
     <div class="inner">
       <div class="section-head">
         <span class="num">CIL-4 &middot; Metodologia &amp; fontes</span>
@@ -1048,17 +1348,22 @@
   <div class="inner" data-b="3">
     <p><b>Fonte-base:</b> Boletim Mensal nº 3 (agosto/2026), Painel El Niño 2026-2027, INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM &mdash; complementado com ASPA 2025 (EMATER-RIO) e com o Mapa de Estações do INMET para acompanhamento diário de temperatura e umidade.</p>
     <p>Níveis de risco por REDEC são uma estimativa qualitativa; recomenda-se calibrá-los com dados operacionais e a Matriz ICR do estado antes de uso em decisões formais.</p>
-    <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível na versão <b>Nº 02 &middot; Julho/2026</b> &mdash; alterne no topo da página.</p>
+    <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível nas versões <b>Nº 02 &middot; Julho/2026</b> e <b>Nº 04 &middot; Setembro/2026</b> &mdash; alterne no topo da página.</p>
   </div>
   <div class="inner" data-b="2" hidden>
     <p><b>Fonte-base:</b> Boletim Mensal nº 2 (julho/2026), Painel El Niño 2026-2027, INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM &mdash; complementado com ASPA 2025 (EMATER-RIO) e com o Mapa de Estações do INMET para acompanhamento diário de temperatura e umidade.</p>
     <p>Documento analítico de apoio à decisão; não substitui os boletins e alertas oficiais dos órgãos citados.</p>
-    <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível na versão <b>Nº 03 &middot; Agosto/2026</b> &mdash; alterne no topo da página.</p>
+    <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível nas versões <b>Nº 03 &middot; Agosto/2026</b> e <b>Nº 04 &middot; Setembro/2026</b> &mdash; alterne no topo da página.</p>
   </div>
   <div class="inner" data-b="4" hidden>
+    <p><b>Fonte-base:</b> Boletim Mensal nº 4 (setembro/2026), Painel El Niño 2026-2027, INMET/INPE/ANA/CEMADEN/SGB/SEDEC/CENSIPAM &mdash; complementado com ASPA 2025 (EMATER-RIO) e com o Mapa de Estações do INMET para acompanhamento diário de temperatura e umidade.</p>
+    <p>Documento analítico de apoio à decisão; não substitui os boletins e alertas oficiais dos órgãos citados.</p>
+    <p style="margin-top:8px; opacity:.8;">Este boletim também está disponível nas versões <b>Nº 02 &middot; Julho/2026</b>, <b>Nº 03 &middot; Agosto/2026</b> e no painel <b>CIL &middot; Mortalidade por Calor</b> &mdash; alterne no topo da página.</p>
+  </div>
+  <div class="inner" data-b="5" hidden>
     <p><b>Fonte-base:</b> Climate Impact Lab &mdash; &ldquo;451,000 at Risk: Where Action Can Save Lives During the Super El Niño&rdquo; (setembro/2026), Greenstone, Carleton, Maricle &amp; Grover-Kopec, EPIC/Universidade de Chicago.</p>
     <p>Modelagem acadêmica internacional independente; não é uma estatística oficial do governo brasileiro. Recomenda-se cruzar com dados de mortalidade do Ministério da Saúde/DATASUS e Fiocruz antes de uso em decisões formais.</p>
-    <p style="margin-top:8px; opacity:.8;">Este painel complementa os Boletins INMET <b>Nº 02 &middot; Julho/2026</b> e <b>Nº 03 &middot; Agosto/2026</b> &mdash; alterne no topo da página.</p>
+    <p style="margin-top:8px; opacity:.8;">Este painel complementa os Boletins INMET <b>Nº 02 &middot; Julho/2026</b>, <b>Nº 03 &middot; Agosto/2026</b> e <b>Nº 04 &middot; Setembro/2026</b> &mdash; alterne no topo da página.</p>
   </div>
 </footer>
 
@@ -1323,8 +1628,9 @@ const RJ_MUN=[{i:'3303401',n:'Nova Friburgo',r:'serrana2',fat:461910450,area:444
         document.querySelectorAll('[data-b="2"]').forEach(function(el){ el.hidden = (set !== '2'); });
         document.querySelectorAll('[data-b="3"]').forEach(function(el){ el.hidden = (set !== '3'); });
         document.querySelectorAll('[data-b="4"]').forEach(function(el){ el.hidden = (set !== '4'); });
+        document.querySelectorAll('[data-b="5"]').forEach(function(el){ el.hidden = (set !== '5'); });
         var tabsNav = document.getElementById('tabs');
-        if(tabsNav){ tabsNav.hidden = (set === '4'); }
+        if(tabsNav){ tabsNav.hidden = (set === '5'); }
       });
     });
   }catch(e){ console.error('boletim switch failed', e); }
@@ -1558,6 +1864,153 @@ const RJ_MUN2=[{i:'3303401',n:'Nova Friburgo',r:'serrana',fat:461910450,area:444
   }catch(e){ console.error('map2 init failed', e); }
 })();
 </script>
+
+<script>
+(function(){
+  try{
+    if(typeof RJ_MUN === 'undefined') return;
+    var REDEC_LABELS = {
+      capital:'Capital', metro:'Metropolitana', serrana1:'Serrana I', serrana2:'Serrana II',
+      sul1:'Sul I (Médio Paraíba)', sul2:'Sul II', costaverde:'Costa Verde', baixadalit:'Baixada Litorânea',
+      baixadaflu:'Baixada Fluminense', noroeste:'Noroeste Fluminense', norte:'Norte Fluminense'
+    };
+    var REDEC_ORDER = ['capital','metro','serrana1','serrana2','sul1','sul2','costaverde','baixadalit','baixadaflu','noroeste','norte'];
+    var svg = document.getElementById('rjMap3');
+    if(!svg) return;
+    var tooltip = document.getElementById('mapTooltip3');
+    var legend = document.getElementById('mapLegend3');
+    var detail = document.getElementById('mapDetail3');
+    var card = svg.closest('.mapsvg-card');
+    var currentLayer = 'fat';
+    var selectedPath = null;
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var items = [];
+
+    function fmtBRL(v){
+      if(v == null) return null;
+      return 'R$ ' + (v/1e6).toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' mi';
+    }
+    function fmtHa(v){ return v == null ? null : v.toLocaleString('pt-BR', {maximumFractionDigits:1}) + ' ha'; }
+    function fmtT(v){ return v == null ? null : v.toLocaleString('pt-BR', {maximumFractionDigits:0}) + ' t'; }
+    function fatTier(v){
+      if(v == null) return 0;
+      if(v >= 300e6) return 4;
+      if(v >= 100e6) return 3;
+      if(v >= 30e6) return 2;
+      return 1;
+    }
+    var fatOpacity = {0:1, 1:0.35, 2:0.55, 3:0.75, 4:1};
+
+    function paintPath(p, m, layer){
+      if(layer === 'redec'){
+        p.setAttribute('fill', 'var(--mun-' + m.r + ')');
+        p.style.fillOpacity = m.fat == null ? 0.35 : 1;
+      } else if(layer === 'cafe'){
+        var hasCafe = m.ca != null && m.ca > 0;
+        p.setAttribute('fill', hasCafe ? 'var(--mun-cafe)' : 'var(--mun-nocafe)');
+        p.style.fillOpacity = 1;
+      } else {
+        var tier = fatTier(m.fat);
+        p.setAttribute('fill', tier === 0 ? 'var(--mun-nodata)' : 'var(--mun-fat-base)');
+        p.style.fillOpacity = fatOpacity[tier];
+      }
+    }
+
+    function buildMap(){
+      RJ_MUN.forEach(function(m){
+        var p = document.createElementNS(svgNS, 'path');
+        p.setAttribute('d', m.d);
+        p.setAttribute('class', 'mun-path');
+        p.dataset.ibge = m.i;
+        paintPath(p, m, currentLayer);
+        p.addEventListener('mouseenter', function(evt){ showTooltip(m, evt); });
+        p.addEventListener('mousemove', function(evt){ positionTooltip(evt); });
+        p.addEventListener('mouseleave', function(){ hideTooltip(); });
+        p.addEventListener('click', function(){ selectMun(p, m); });
+        svg.appendChild(p);
+        items.push({m:m, el:p});
+      });
+    }
+
+    function showTooltip(m, evt){
+      var val = m.fat != null ? fmtBRL(m.fat) : 'sem produção agregável';
+      tooltip.innerHTML = '<div>' + m.n + '</div><div class="t-val">' + val + '</div>';
+      tooltip.classList.add('show');
+      positionTooltip(evt);
+    }
+    function positionTooltip(evt){
+      var r = card.getBoundingClientRect();
+      var x = evt.clientX - r.left + 14;
+      var y = evt.clientY - r.top + 14;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    }
+    function hideTooltip(){ tooltip.classList.remove('show'); }
+
+    function selectMun(p, m){
+      if(selectedPath) selectedPath.classList.remove('selected');
+      p.classList.add('selected');
+      selectedPath = p;
+      if(m.fat == null){
+        detail.innerHTML =
+          '<div class="d-name">' + m.n + '</div>' +
+          '<div class="d-ibge">Código IBGE ' + m.i + '</div>' +
+          '<div class="d-row" style="border-top:none; padding-top:0;"><span>Sem produção agrícola consolidada na base ASPA 2025</span></div>';
+        return;
+      }
+      var rows = '';
+      rows += '<div class="d-row"><span>Região (REDEC)</span><b>' + REDEC_LABELS[m.r] + '</b></div>';
+      rows += '<div class="d-row"><span>Faturamento (ASPA 2025)</span><b>' + fmtBRL(m.fat) + '</b></div>';
+      rows += '<div class="d-row"><span>Área colhida</span><b>' + fmtHa(m.area) + '</b></div>';
+      rows += '<div class="d-row"><span>Produção</span><b>' + fmtT(m.prod) + '</b></div>';
+      if(m.top && m.top.length) rows += '<div class="d-row"><span>Principais produtos</span><b>' + m.top.slice(0,3).join(', ').toLowerCase() + '</b></div>';
+      if(m.ca != null) rows += '<div class="d-row"><span>&#9749; Café arábica</span><b>' + fmtHa(m.ca) + '</b></div>';
+      detail.innerHTML =
+        '<div class="d-name">' + m.n + '</div>' +
+        '<div class="d-ibge">Código IBGE ' + m.i + '</div>' +
+        rows;
+    }
+
+    function buildLegend(layer){
+      var html = '';
+      if(layer === 'fat'){
+        html += '<h4>Faturamento agrícola (ASPA 2025)</h4>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-fat-base); opacity:1"></span>&ge; R$ 300 mi</div>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-fat-base); opacity:.75"></span>R$ 100&ndash;300 mi</div>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-fat-base); opacity:.55"></span>R$ 30&ndash;100 mi</div>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-fat-base); opacity:.35"></span>&lt; R$ 30 mi</div>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-nodata)"></span>Sem produção agregável (6 munic.)</div>';
+      } else if(layer === 'cafe'){
+        html += '<h4>Exposição cafeeira</h4>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-cafe)"></span>Com café arábica registrado (ASPA 2025)</div>';
+        html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-nocafe)"></span>Sem café arábica registrado</div>';
+      } else {
+        html += '<h4>Regional de Defesa Civil</h4>';
+        REDEC_ORDER.forEach(function(k){
+          html += '<div class="leg-row"><span class="leg-swatch" style="background:var(--mun-' + k + ')"></span>' + REDEC_LABELS[k] + '</div>';
+        });
+      }
+      legend.innerHTML = html;
+    }
+
+    function setLayer(layer){
+      currentLayer = layer;
+      items.forEach(function(it){ paintPath(it.el, it.m, layer); });
+      buildLegend(layer);
+      document.querySelectorAll('#webmapB4 .maptab').forEach(function(btn){
+        btn.classList.toggle('active', btn.dataset.layer === layer);
+      });
+    }
+
+    buildMap();
+    buildLegend(currentLayer);
+    document.querySelectorAll('#webmapB4 .maptab').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLayer(btn.dataset.layer); });
+    });
+  }catch(e){ console.error('map3 init failed', e); }
+})();
+</script>
+
 
 
 
