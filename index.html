@@ -38,6 +38,7 @@
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
+  html, body{ max-width:100%; overflow-x:hidden; }
   body{
     margin:0; background:var(--bg); color:var(--text-primary);
     font-family:"Public Sans","Segoe UI",system-ui,-apple-system,sans-serif;
@@ -55,7 +56,7 @@
   .topnav .inner{ display:flex; align-items:center; gap:28px; height:56px; }
   .brand{ font-size:13px; font-weight:800; letter-spacing:.03em; color:var(--on-navy); white-space:nowrap; }
   .brand b{ color:var(--gold); }
-  .tabs{ display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; }
+  .tabs{ display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; min-width:0; -webkit-overflow-scrolling:touch; }
   .tabs[hidden]{ display:none; }
   .tabs::-webkit-scrollbar{ display:none; }
   .tabs a{
@@ -176,7 +177,7 @@
   .rank-row .val{ font-size:13.5px; font-weight:800; font-variant-numeric:tabular-nums; color:var(--text-primary); white-space:nowrap; }
 
   /* ---------- risk matrix ---------- */
-  .matrix-scroll{ overflow-x:auto; border:1px solid var(--border); border-radius:12px; }
+  .matrix-scroll{ overflow-x:auto; border:1px solid var(--border); border-radius:12px; -webkit-overflow-scrolling:touch; }
   table.matrix{ border-collapse:collapse; width:100%; min-width:760px; font-size:13.5px; }
   table.matrix th, table.matrix td{ padding:10px 12px; text-align:left; border-bottom:1px solid var(--grid); }
   table.matrix thead th{ background:var(--navy-900); color:var(--on-navy-muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; font-weight:700; position:sticky; top:0; }
@@ -225,7 +226,13 @@
 
   @media (max-width:520px){
     .stat-tile .value{ font-size:21px; }
-    .hero{ padding-block:36px 32px; }
+    .hero{ padding-block:32px 28px; }
+    .hero h1{ font-size:clamp(26px,8vw,38px); }
+    .hero .subtitle{ font-size:14.5px; }
+    .chip{ font-size:11.5px; padding:7px 11px; }
+    .inner{ padding-inline:16px; }
+    section{ padding-block:38px; }
+    .section-head h2{ font-size:clamp(19px,5.5vw,24px); }
   }
 
   /* ---------- municipal webmap ---------- */
@@ -287,15 +294,29 @@
   .map-detail .d-empty{ font-size:13px; color:var(--on-navy-faint); line-height:1.5; }
 
   /* ---------- boletim switch ---------- */
-  .boletsw{ display:flex; align-items:center; gap:6px; margin-left:auto; }
+  .boletsw{
+    display:flex; align-items:center; gap:6px; margin-left:auto;
+    overflow-x:auto; scrollbar-width:none; min-width:0; -webkit-overflow-scrolling:touch;
+  }
+  .boletsw::-webkit-scrollbar{ display:none; }
   .boletsw button{
-    font: inherit; font-size:12px; font-weight:700; color:var(--on-navy-muted);
+    font: inherit; font-size:12px; font-weight:700; color:var(--on-navy-muted); flex:none;
     background:transparent; border:1px solid rgba(255,255,255,0.18); border-radius:99px;
     padding:6px 13px; cursor:pointer; white-space:nowrap; transition:background .15s, color .15s, border-color .15s;
   }
   .boletsw button.active{ background:var(--gold); color:var(--navy-950); border-color:var(--gold); }
   .boletsw button:not(.active):hover{ color:#fff; border-color:rgba(255,255,255,0.4); }
-  @media (max-width:760px){ .boletsw{ margin-left:0; width:100%; order:3; padding-bottom:10px; } .topnav .inner{ flex-wrap:wrap; height:auto; padding-block:10px; } section, main>div[id]{ scroll-margin-top:128px; } }
+  @media (max-width:760px){
+    .topnav .inner{ flex-wrap:wrap; height:auto; padding-block:10px; row-gap:8px; }
+    .brand{ flex:none; }
+    .tabs{ flex:1 1 auto; }
+    .boletsw{ margin-left:0; width:100%; order:3; flex:0 0 100%; -webkit-mask-image:linear-gradient(90deg,#000 94%,transparent); mask-image:linear-gradient(90deg,#000 94%,transparent); }
+    section, main>div[id]{ scroll-margin-top:132px; }
+  }
+  @media (max-width:420px){
+    .boletsw button{ font-size:11.5px; padding:6px 11px; }
+    .brand{ font-size:12px; }
+  }
 
   [data-b]{ }
 
